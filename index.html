@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>The STAR unemployment algorithm</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="styles.css" type="text/css">
+
+  <script src="p5vis.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+</head>
+
+
+<body>
+
+
+  <section id="opening_screen">
+
+    <div class="row-1">
+      <div class="col-1">
+        <img src="logo_confrontingdata.png" alt="Confronting Data logo">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <h1>Vizualizing the STAR unemployment algorithm</h1>
+        <!-- lorem ipsum -->
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pharetra scelerisque tortor, sit amet
+          interdum quam euismod sit amet. Aliquam in eleifend quam, vitae vehicula urna. Cras lectus tellus, tempor ac
+          pulvinar eget, sodales at enim. Etiam semper eu enim sed aliquam. Praesent et eros et ex ultrices ullamcorper.
+          Phasellus orci sapien, efficitur egestas ligula sit amet, commodo interdum magna. Nam congue, lectus a lacinia
+          convallis, sapien erat semper risus, vitae iaculis quam erat sit amet purus. Quisque vitae blandit mi.
+          Pellentesque at velit scelerisque, sodales magna et, viverra augue. Nunc venenatis felis non placerat
+          sollicitudin. Nullam volutpat vulputate velit, ut posuere sem luctus sit amet.
+          <br>
+          <br>
+          NB! This webapp does not use cookies, your data will not be passed on to third paries nor will we save and
+          store your data.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3"></div>
+    </div>
+
+  </section>
+
+  <section id="question_screen">
+    <!-- QUESTION 1 -->
+    <div id="q1" class="questionContainer">
+      <div class="question">
+        <label>What is your highest completed education level?</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer1" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option value="0">Enter answer</option>
+          <option value="lowRisk">TO BE FILLED</option>
+          <option value="lowRisk">TO BE FILLED</option>
+          <option value="lowRisk">TO BE FILLED</option>
+          <option value="further">TO BE FILLED</option>
+          <option value="atRisk">TO BE FILLED</option>
+          <option value="atRisk">TO BE FILLED</option>
+          <option value="atRisk">TO BE FILLED</option>
+          <option value="further">TO BE FILLED</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 1a -->
+    <div id="q1" class="questionContainer">
+      <div class="question">
+        <label>In which field of study were you educated? (based on your highest completed education qualification)</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer1a" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option value="0">Enter answer</option>
+          <option value="lowRisk">Humanities, religion or aesthetics</option>
+          <option value="lowRisk">Non-vocational</option>
+          <option value="lowRisk">Industry or craftsman</option>
+          <option value="further">Agricultural-, fisheries- and food</option>
+          <option value="atRisk">Science</option>
+          <option value="atRisk">Pedagogica</option>
+          <option value="atRisk">Community-, office- and business</option>
+          <option value="further">Health</option>
+          <option value="further">Transport and communication engineering</option>
+          <option value="further">Education on public safety</option>
+          <option value="further">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div id="q2" class="questionContainer">
+      <div class="question">
+        <label>How long do you think it will take before you get a job?</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer2" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option value="0">Enter answer</option>
+          <option value="lowRisk">I have a new job, but I haven't started yet</option>
+          <option value="lowRisk">within 1 month</option>
+          <option value="lowRisk">Within 3 months</option>
+          <option value="further">Within 6 months</option>
+          <option value="atRisk">It will be more than 6 months</option>
+          <option value="atRisk">I expect to go on maternity leave soon</option>
+          <option value="atRisk">I expect to retire soon</option>
+          <option value="further">Don't know</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div id="q3" class="questionContainer">
+      <div class="question">
+        <label>Were you terminated, or did you resign, from your previous job?</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer3" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option>Enter answer</option>
+          <option value="lowRisk">I was terminated</option>
+          <option value="lowRisk">I resigned</option>
+          <option value="lowRisk">I have been self-employed until now</option>
+          <option value="further">I did not have a job (e.g. if you have received sickness or maternity benifits, etc., or have interrupted your education)</option>
+          <option value="atRisk">I am a graduate</option>
+          <option value="atRisk">I have been temporarily sent home</option>
+          <option value="atRisk">Other</option>
+        </select>
+      </div>
+    </div>
+    <!-- QUESTION 4 -->
+    <div id="q4" class="questionContainer">
+      <div class="question">
+        <label>For how long have you known that you would be unemployed?</label>
+      </div>
+
+      <div id="answer4" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option>I have know it for less than a week</option>
+          <option>I have known it for the past month</option>
+          <option>I have known it for the past tree months</option>
+          <option>I have known it for the previous six months</option>
+          <option>I have known for over six months</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div id="q5" class="questionContainer">
+      <div class="question">
+        <label>How many jobs have you applied for since you became unemployed?</label>
+      </div>
+
+      <div id="answer5" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option>I have not applied for any jobs</option>
+          <option>I have applied for 1 job</option>
+          <option>I have applied for 2-5 jobs</option>
+          <option>I have applied for over 5 jobs</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 6 -->
+    <div id="q6" class="questionContainer">
+      <div class="question">
+        <label>How do you assess your job opportunities in the areas where you are looking for work?</label>
+      </div>
+
+      <div id="answer6" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option>My job opportunities are good</option>
+          <option>My job opportunities are fairly good</option>
+          <option>My job opportunities are not so good</option>
+          <option>My job opportunities are poor</option>
+          <option>Don't know</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 7 -->
+    <div id="q7" class="questionContainer">
+      <div class="question">
+        <label>Do you know what job you would like to have?</label>
+      </div>
+
+      <div id="answer7" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option>I know exactly what kind of job I want</option>
+          <option>I have an idea of what types of job I would like to have</option>
+          <option>I have a few vague ideas about what kinds of job I would like to have</option>
+          <option>I do not know whawt kind of job I would like to have</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 8 -->
+    <div id="q8" class="questionContainer">
+      <div class="question">
+        <label>How do you apply for/plan to apply for jobs? (You may check multiple boxes)</label>
+      </div>
+
+      <div class="checkBoxes" id="answer8" style="width:800px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <input type="checkbox" id="myCheck"> Responding to advertisements in newspapers, magazines, the internet, etc. <br>
+        <input type="checkbox" id="myCheck"> Sending uncolicited job applications <br>
+        <input type="checkbox" id="myCheck"> Contacting employers personally or by phone <br>
+        <input type="checkbox" id="myCheck"> Using social media (Facebook, LinkedIn, etc.) <br>
+        <input type="checkbox" id="myCheck"> Using my network (contacting friends, family, former study or work colleagues, etc.) <br>
+        <input type="checkbox" id="myCheck"> Temp agency <br>
+      </div>
+    
+    </div>
+    <!-- QUESTION 9 -->
+    <div id="q9" class="questionContainer">
+      <div class="question">
+        <label>Which of the following considerations are you making to increase your job opportunities? (You may check multiple boxes)</label>
+      </div>
+
+      <div class="checkBoxes" id="answer8" style="width:800px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <input type="checkbox" id="myCheck"> I am considering changing industry <br>
+        <input type="checkbox" id="myCheck"> I am considering commuting long distances <br>
+        <input type="checkbox" id="myCheck"> I am considering moving <br>
+        <input type="checkbox" id="myCheck"> I am considering taking another education <br>
+        <input type="checkbox" id="myCheck"> I am considering pay cuts <br>
+        <input type="checkbox" id="myCheck"> I am not considering any of the above <br>
+      </div>
+    </div>
+
+    <!-- QUESTION 10 -->
+    <div id="q10" class="questionContainer">
+      <div class="question">
+        <label>Is there anything that makes it difficult for you to get a job?</label>
+      </div>
+
+      <div id="answer10" class="custom-select" style="width:400px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <select id="og-select">
+          <option>Enter answer</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Don't know</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- QUESTION 10a -->
+    <div id="q10a" class="questionContainer">
+      <div class="question">
+        <label>What is making it difficult for you to get a job? (You may check multiple boxes)</label>
+      </div>
+
+      <div class="checkBoxes" id="answer8" style="width:800px;">
+        <!-- this does not do anything. It only gives the custom select the content -->
+        <input type="checkbox" id="myCheck"> My physical health <br>
+        <input type="checkbox" id="myCheck"> My mental health <br>
+        <input type="checkbox" id="myCheck"> Personal or social conditions <br>
+        <input type="checkbox" id="myCheck"> Financial conditions <br>
+        <input type="checkbox" id="myCheck"> Alcohol addication or drug abuse <br>
+        <input type="checkbox" id="myCheck"> Lack of reading, spelling or math skills <br>
+        <input type="checkbox" id="myCheck"> Lack of IT skills <br>
+        <input type="checkbox" id="myCheck"> Language Barriers <br>
+        <input type="checkbox" id="myCheck"> Other, please specify <br>
+      </div>
+        
+    </div>
+
+
+    <!-- nationality -->
+    <div id="q12" class="questionContainer">
+      <div class="question">
+        <label>What is your nationality?</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer12" class="custom-select" style="width:400px;">
+
+        <select id="og-select">
+          <option value="0">Enter answer</option>
+          <option value="further">Danish</option>
+          <option value="atRisk">Western immigrant</option>
+          <option value="atRisk">Western descendant</option>
+          <option value="further">Non-western immigrant</option>
+          <option value="atRisk">Non-western descendant</option>
+          <option value="further">Origin unkown</option>
+        </select>
+      </div>
+    </div>
+    <!-- TODO age -->
+    <div id="q11" class="questionContainer">
+      <div class="question">
+        <label>How old are you?</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer11" style="width:400px;">
+
+        <input id="ageInput" type="number" style="width:400px; height: 40px;" placeholder="Enter your age">
+      </div>
+    </div>
+
+    <!-- TODO rate of employment -->
+    <div id="q13" class="questionContainer">
+      <div class="question">
+        <label>How many months out of the last 36 months have you been employed?</label>
+      </div>
+
+      <!-- Surround the select box within a "custom-select" DIV element.
+        Remember to set the width: -->
+      <div id="answer13" style="width:400px;">
+        <input id="employrateInput" type="number" style="width:400px; height: 40px;" placeholder="Enter your rate of employment">
+      </div>
+    </div>
+
+    <a href="#viz_screen" onclick="showViz()">To viz screen</a>
+
+  </section>
+
+
+  <section id="viz_screen">
+    This is viz_screen
+    <div id="sketch_holder">
+      <!-- this is sketch -->
+    </div>
+  </section>
+
+
+  <section id="closing_screen">
+    This is closing_screen
+  </section>
+
+
+</body>
+
+</html>
+
+<!-- <a href="#viz_screen">To viz screen</a> -->
