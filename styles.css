@@ -30,6 +30,12 @@ p {
 	margin: 1% 2.5% 2.5% 2.5%;
 	text-align: left;
 }
+.info {
+	background-color: white;
+	color: black;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
 
 
 html {
@@ -96,7 +102,7 @@ body {
 }
 
 .questionContainer {
-	height: 10rem;
+	height: fit-content;
 	margin-bottom: 2rem;
 }
 .question {
@@ -108,6 +114,7 @@ body {
 
 .checkBoxes {
 	color: white;
+	height: fit-content;
 }
 
 /* The container must be positioned relative: */

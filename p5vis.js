@@ -183,7 +183,7 @@ function setup() {
     rectMode(CENTER, CENTER);
     textAlign(CENTER, CENTER);
     
-    theFont = loadFont("./fonts/EbGaramondSmallcaps12Regular-XBAZ.ttf")
+    theFont = loadFont("AdobeGaramondProRegular.ttf")
     textFont(theFont);
     textSize(25);
     
@@ -594,8 +594,8 @@ function Line(startX, startY, endX, endY) {
 
 function showViz() {
     // set what the expectationBox needs
-
-    expectationBox.setAnswer(answer2.innerHTML);
+    // TODO DET ER HER JEG ER NÅET TIL
+    expectationBox.setAnswer(document.getElementById("answer2").innerHTML);
     if (
         expectationBox.answer == "I have a new job, but I haven't started yet" || 
         expectationBox.answer == "Within 1 month" ||
@@ -616,7 +616,7 @@ function showViz() {
 
 
     
-    originBox.setAnswer(answer9.innerHTML);
+    originBox.setAnswer(document.getElementById("answer9").innerHTML);
     if (
         originBox.answer == "Western immigrant" ||
         originBox.answer == "Western descendant" ||
