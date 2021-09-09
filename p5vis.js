@@ -600,7 +600,6 @@ function Line(startX, startY, endX, endY) {
 
 function showViz() {
     // set what the expectationBox needs
-    // TODO DET ER HER JEG ER NÅET TIL
     expectationBox.setAnswer(document.getElementById("answer2").innerHTML);
     if (
         expectationBox.answer == "I have a new job, but I haven't started yet" || 
@@ -989,3 +988,8 @@ function getSelectedText(elementId) {
 document.addEventListener("DOMContentLoaded", function(event) { 
     main();
   });
+
+  window.addEventListener('resize', function(event) {
+      console.log(windowWidth + " x " + windowHeight);
+    resizeCanvas(windowWidth, windowHeight);
+}, true);
