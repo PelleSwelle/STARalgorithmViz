@@ -87,7 +87,7 @@ body {
 	width: 100%;
 	height:fit-content;
 	background: black;
-	background-color: yellow;
+	background-color: black;
 } 
 
 #viz_screen {
@@ -141,6 +141,7 @@ body {
 .scrollButton:hover {
 	cursor: pointer;
 	background-color: darkred;
+	
 }
 
 

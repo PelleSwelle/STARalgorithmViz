@@ -826,17 +826,149 @@ function drawGrid() {
         nope5Box.xpos, nope5Box.ypos);
 }
 
+// TODO this is supposed to eventually concatenate all the html elements into one array, that we can cycle through
+var openingScreen = document.getElementById("opening_screen");
+var questions = document.getElementsByClassName("questionContainer");
+var vizScreen = document.getElementById("viz_screen");
+var closingScreen = document.getElementById("closing_screen");
+// let scrollPoints = new Array;
 
-// TODO make these go to the scroll point
+var textTest = "q1"
+
+var arr = Array.from(questions);
+// initial scroll position
+let currentScrollPoint = openingScreen;
+
+var isInViewport = function (elem) {
+    var bounding = elem.getBoundingClientRect();
+    return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
 function scrollUp() {
     console.log("scroll up");
-    scrollBy(0, -1000);
-    
-}
 
+    if (isInViewport(document.getElementById("opening_screen"))) {
+        // do nothing
+    }
+    else if (isInViewport(document.getElementById("q1"))) {
+        document.getElementById("opening_screen").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q1a"))) {
+        document.getElementById("q1").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q2"))) {
+        document.getElementById("q1a").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q3"))) {
+        document.getElementById("q2").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q4"))) {
+        document.getElementById("q3").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q5"))) {
+        document.getElementById("q4").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q6"))) {
+        document.getElementById("q5").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q7"))) {
+        document.getElementById("q6").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q8"))) {
+        document.getElementById("q7").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q9"))) {
+        document.getElementById("q8").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q10"))) {
+        document.getElementById("q9").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q10a"))) {
+        document.getElementById("q10").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("info"))) {
+        document.getElementById("q10a").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q11"))) {
+        document.getElementById("info").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q12"))) {
+        document.getElementById("q11").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q13"))) {
+        document.getElementById("q12").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("viz_screen"))) {
+        document.getElementById("q13").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("closing_screen"))) {
+        document.getElementById("viz_screen").scrollIntoView();
+    }
+}
+    
 function scrollDown() {
-    console.log("scroll down");
-    scrollBy(0, 1000);
+    console.log("Button was pushed, scroll down");
+    
+    if (isInViewport(document.getElementById("opening_screen"))) {
+        document.getElementById("q1").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q1"))) {
+        document.getElementById("q1a").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q1a"))) {
+        document.getElementById("q2").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q2"))) {
+        document.getElementById("q3").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q3"))) {
+        document.getElementById("q4").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q4"))) {
+        document.getElementById("q5").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q5"))) {
+        document.getElementById("q6").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q6"))) {
+        document.getElementById("q7").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q7"))) {
+        document.getElementById("q8").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q8"))) {
+        document.getElementById("q9").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q9"))) {
+        document.getElementById("q10").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q10"))) {
+        document.getElementById("q10a").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q10a"))) {
+        document.getElementById("info").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("info"))) {
+        document.getElementById("q11").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q11"))) {
+        document.getElementById("q12").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q12"))) {
+        document.getElementById("q13").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("q13"))) {
+        document.getElementById("viz_screen").scrollIntoView();
+        showViz();
+    }
+    else if (isInViewport(document.getElementById("viz_screen"))) {
+        document.getElementById("closing_screen").scrollIntoView();
+    }
 }
 
 
