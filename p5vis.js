@@ -184,6 +184,7 @@ let centerX, centerY;
 function setup() {
         canvas = createCanvas(windowWidth, windowHeight);
         canvas.parent('sketch_holder');
+        background(black);
         
         currentWindowWidth = windowWidth;
         currentWindowHeight = windowHeight;
@@ -193,7 +194,7 @@ function setup() {
         
         theFont = loadFont("AdobeGaramondProRegular.ttf")
         textFont(theFont);
-        textSize(currentWindowWidth/55);
+        textSize(14 + 6 * ((currentWindowWidth - 320) / 680));
         
         yGrid = currentWindowHeight / 6;
         row1Y = yGrid;
@@ -263,8 +264,6 @@ function draw()
     
     
         // for every line
-        
-        
         lines[0].update();
         lines[0].display();
         if (lines[1] != null) 
@@ -302,7 +301,9 @@ function draw()
             if (lines[3].hasArrived) 
             {
                 ageBox.updateAnswerAlpha();
-                ageBox.displayAnswer();
+                if (ageBox.isActive) {
+                    ageBox.displayAnswer();
+                }
     
                 lines[4].update();
                 lines[4].display();
@@ -653,9 +654,12 @@ function showViz() {
     }
 
     calcPath();
-    document.getElementById("defaultCanvas0").scrollIntoView();
     vizIsVisible = true;
     console.log("showViz is done");
+}
+
+function scrollToSketch() {
+    document.getElementById("defaultCanvas0").scrollIntoView();
 }
 
 class Box 
@@ -682,7 +686,7 @@ class Box
 
     displayAnswer() {
         noStroke();
-        textSize(currentWindowWidth/55);
+        textSize(12 + 6 * ((currentWindowWidth - 320) / 680));
         fill(255, 255, 255, this.ansCurrentAlpha);
         textAlign(LEFT, BOTTOM);
         if (this == ageBox) {
@@ -716,7 +720,7 @@ class Box
         fill(black);
         // TODO can this be according to screenwidth?
         textAlign(CENTER, CENTER);
-        textSize(currentWindowWidth/55);
+        textSize(14 + 6 * ((currentWindowWidth - 320) / 680));
         text(this.text, this.xpos, this.ypos);
     }
 }
