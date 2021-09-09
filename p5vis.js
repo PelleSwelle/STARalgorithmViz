@@ -4,6 +4,7 @@ let sameAsSelected, selects, previousSibling, noOfSelects, noOfSameAsSelected;
 
 let currentWindowWidth;
 let currentWindowHeight;
+let boxWidth;
 
 function main() {
     /* Look for any elements with the class "custom-select": */
@@ -222,6 +223,17 @@ function setup() {
         yes5Box = new Box("Low risk of\nlong term unemployment");
         nope5Box = new Box("High risk of\nlong term unemployment");    
         console.log("sketch setup done");
+
+        expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
+        originBox.display(centerX, row2Y, boxWidth, lineHeight);
+        ageBox.display(centerX, row3Y, boxWidth, lineHeight);
+        employRateBox.display(centerX, row4Y, boxWidth, lineHeight);
+        nope2Box.display(centerX + width / 4, row2Y, boxWidth, lineHeight*2);
+        yes2Box.display(centerX - width / 4, row2Y, boxWidth, lineHeight*2);
+        nope3Box.display(centerX - width / 4, row3Y, boxWidth, lineHeight*2); 
+        nope4Box.display(centerX + width / 4, row4Y, boxWidth, lineHeight*2);
+        yes5Box.display(centerX - width / 5, row5Y, boxWidth, lineHeight*2);
+        nope5Box.display(centerX + width / 5, row5Y, boxWidth, lineHeight*2);
 }
 
 function draw() 
@@ -246,22 +258,9 @@ function draw()
         // text("The STAR algorithm", centerX, 100);
     
         drawGrid();
-
-        let boxWidth = currentWindowWidth / 5;
-    
-        // // display boxes
-        expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
-        originBox.display(centerX, row2Y, boxWidth, lineHeight);
-        ageBox.display(centerX, row3Y, boxWidth, lineHeight);
-        employRateBox.display(centerX, row4Y, boxWidth, lineHeight);
-        nope2Box.display(centerX + width / 4, row2Y, boxWidth, lineHeight*2);
-        yes2Box.display(centerX - width / 4, row2Y, boxWidth, lineHeight*2);
-        nope3Box.display(centerX - width / 4, row3Y, boxWidth, lineHeight*2); 
-        nope4Box.display(centerX + width / 4, row4Y, boxWidth, lineHeight*2);
-        yes5Box.display(centerX - width / 5, row5Y, boxWidth, lineHeight*2);
-        nope5Box.display(centerX + width / 5, row5Y, boxWidth, lineHeight*2);
-    
         
+        boxWidth = currentWindowWidth / 5;
+    
     
         // for every line
         
@@ -354,6 +353,18 @@ function draw()
             }
         }
     }
+
+        // // display boxes
+        expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
+        originBox.display(centerX, row2Y, boxWidth, lineHeight);
+        ageBox.display(centerX, row3Y, boxWidth, lineHeight);
+        employRateBox.display(centerX, row4Y, boxWidth, lineHeight);
+        nope2Box.display(centerX + width / 4, row2Y, boxWidth, lineHeight*2);
+        yes2Box.display(centerX - width / 4, row2Y, boxWidth, lineHeight*2);
+        nope3Box.display(centerX - width / 4, row3Y, boxWidth, lineHeight*2); 
+        nope4Box.display(centerX + width / 4, row4Y, boxWidth, lineHeight*2);
+        yes5Box.display(centerX - width / 5, row5Y, boxWidth, lineHeight*2);
+        nope5Box.display(centerX + width / 5, row5Y, boxWidth, lineHeight*2);
      
 }
 
@@ -620,8 +631,8 @@ function showViz() {
     }
     else if (
         originBox.answer == "Danish" ||
-        originBox.answer == "Non-western Immigrant" ||
-        originBox.answer == "Origin Unknown") {
+        originBox.answer == "Non-western immigrant" ||
+        originBox.answer == "Origin unknown") {
             originBox.setValue("further")
     }
 
@@ -634,13 +645,13 @@ function showViz() {
     }
 
     employRateBox.setAnswer(document.getElementById("employrateInput").value);
-    // TODO Therese ved hvordan det her skal regnes ud.
     if (employRateBox.answer < 3) {
         employRateBox.setValue("atRisk");
     }
     else if (employRateBox.answer >= 3) {
         employRateBox.setValue("lowRisk");
     }
+
     calcPath();
     document.getElementById("defaultCanvas0").scrollIntoView();
     vizIsVisible = true;
@@ -811,19 +822,6 @@ function drawGrid() {
         nope5Box.xpos, nope5Box.ypos);
 
 }
-
-// TODO this is supposed to eventually concatenate all the html elements into one array, that we can cycle through
-var openingScreen = document.getElementById("opening_screen");
-var questions = document.getElementsByClassName("questionContainer");
-var vizScreen = document.getElementById("viz_screen");
-var closingScreen = document.getElementById("closing_screen");
-// let scrollPoints = new Array;
-
-var textTest = "q1"
-
-var arr = Array.from(questions);
-// initial scroll position
-let currentScrollPoint = openingScreen;
 
 var isInViewport = function (elem) {
     var bounding = elem.getBoundingClientRect();
