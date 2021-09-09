@@ -87,6 +87,7 @@ body {
 	width: 100%;
 	height:fit-content;
 	background: black;
+	background-color: yellow;
 } 
 
 #viz_screen {
@@ -95,6 +96,7 @@ body {
 	background: blue;
 }
 
+
 #closing_screen {
 	width: 100%;
 	height: 100vh;
@@ -102,8 +104,9 @@ body {
 }
 
 .questionContainer {
-	height: fit-content;
+	height: 100vh;
 	margin-bottom: 2rem;
+	margin-left: 3rem;
 }
 .question {
 	/* height: 10rem; */
@@ -111,6 +114,30 @@ body {
 	padding-bottom: 2rem;
 	/* TODO makes this bigger font size */
 }
+
+#scrollButtonContainer {
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+    display: flex;
+    top: 0;
+    /* left: 0; */
+    bottom: 0;
+    right: 5rem;
+	background-color: green;
+}
+
+.scrollButton{
+	width: 100%;
+    background-color: red;
+	
+}
+.scrollButton:hover {
+	cursor: pointer;
+	background-color: darkred;
+}
+
 
 .checkBoxes {
 	color: white;

@@ -2,6 +2,7 @@
 let customSelects, noOfCustomSelects, noOfOptions, stockSelects, selectedItem, optionList, optionItem, optionValue;
 let sameAsSelected, selects, previousSibling, noOfSelects, noOfSameAsSelected;
 
+
 function main() {
     /* Look for any elements with the class "custom-select": */
     customSelects = document.getElementsByClassName("custom-select");
@@ -100,6 +101,11 @@ function main() {
     if (document.getElementById("answer8").innerHTML == "Yes") {
         console.log("this should show the thing");
     }
+
+    
+    console.log("scrollPositions: " + scrollPositions);
+    let currentScrollPosition = 0;
+    
 }
 
 var canvas;
@@ -813,6 +819,19 @@ function drawGrid() {
 }
 
 
+// TODO make these go to the scroll point
+function scrollUp() {
+    console.log("scroll up");
+    scrollBy(0, -1000);
+    
+}
+
+function scrollDown() {
+    console.log("scroll down");
+    scrollBy(0, 1000);
+}
+
+
 function getSelectedText(elementId) {
     var element = document.getElementById(elementId);
 
@@ -823,11 +842,6 @@ function getSelectedText(elementId) {
         return element.options[element.selectedIndex].text;
     }
 }
-
-function goToQuestions() {
-    document.getElementById("q1").scrollIntoView();
-}
-
 
 // TODO make why box visible if answer is yes.
 
