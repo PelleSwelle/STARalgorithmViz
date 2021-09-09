@@ -2,28 +2,28 @@
   font-family: AdobeGaramondPro;
   font-style: normal;
   font-weight: normal;
-  src: url("AdobeGaramondProRegular.ttf");
+  src: url("fonts/AdobeGaramondProRegular.ttf");
 }
 
 @font-face {
   font-family: AdobeGaramondPro;
   font-style: normal;
   font-weight: bold;
-  src: url("AdobeGaramondProBold.ttf");
+  src: url("fonts/AdobeGaramondProBold.ttf");
 }
 
 @font-face {
   font-family: AdobeGaramondPro;
   font-style: italic;
   font-weight: normal;
-  src: url("AdobeGaramondProItalic.ttf");
+  src: url("fonts/AdobeGaramondProItalic.ttf");
 }
 
 @font-face {
   font-family: AdobeGaramondPro;
   font-style: italic;
   font-weight: bold;
-  src: url("AdobeGaramondProBoldItalic.ttf");
+  src: url("fonts/AdobeGaramondProBoldItalic.ttf");
 }
 
 * {
