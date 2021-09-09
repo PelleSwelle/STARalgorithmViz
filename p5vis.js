@@ -209,6 +209,7 @@ function setup() {
         centerX = currentWindowWidth / 2;
         centerY = currentWindowHeight / 2;
         vertSpacing = currentWindowHeight / 6;
+        noStroke();
         
         expectationBox = new Box("how quickly do you believe\nthat you will get a job?");
         originBox = new Box("Origin");
@@ -227,7 +228,7 @@ function draw()
 {
     if (vizIsVisible) 
     {
-        background(0, 255, 255);
+        background(black);
         currentWindowWidth = windowWidth;
         currentWindowHeight = windowHeight;
         centerX = currentWindowWidth / 2;
@@ -634,10 +635,10 @@ function showViz() {
 
     employRateBox.setAnswer(document.getElementById("employrateInput").value);
     // TODO Therese ved hvordan det her skal regnes ud.
-    if (employRateBox.answer <= 18) {
+    if (employRateBox.answer < 3) {
         employRateBox.setValue("atRisk");
     }
-    else if (employRateBox.answer > 18) {
+    else if (employRateBox.answer >= 3) {
         employRateBox.setValue("lowRisk");
     }
     calcPath();
