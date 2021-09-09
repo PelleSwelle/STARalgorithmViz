@@ -1,11 +1,3 @@
-* {
-	margin: 0;
-	padding: 0;
-	border: 1px solid red;
-	box-sizing: border-box;
-}
-
-
 @font-face {
   font-family: AdobeGaramondPro;
   font-style: normal;
@@ -34,33 +26,37 @@
   src: url("AdobeGaramondProBoldItalic.ttf");
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	/*border: 1px solid red;*/
+	box-sizing: border-box;
+}
 
 h1 {
 	font-family: AdobeGaramondPro;
 	font-weight: bold;
-	margin: 2.5% 2.5% 1% 2.5%;
+	margin: 2.5% 5% 2.5% 5%;
 	text-align: left;
 }
+
+h3 {
+	font-family: AdobeGaramondPro;
+	font-weight: bold;
+	text-align: left;
+}
+
+
+p {
+	font-family: AdobeGaramondPro;
+	margin: 2.5% 5% 2.5% 5%;
+	text-align: left;
+}
+
 
 a {
   color: #FFFFFF;
 }
-
-p {
-	font-family: AdobeGaramondPro;
-	margin: 1% 2.5% 2.5% 2.5%;
-	text-align: left;
-}
-
-
-
-#info {
-	background-color: white;
-	color: black;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-}
-
 
 
 html {
@@ -109,7 +105,7 @@ body {
 .col-1 img {
   max-width: 85%;
   max-height: 85%;
-  margin: 2.5%;
+  margin: 5%;
 }
 .col-2 {
   width: 100%;
@@ -128,16 +124,127 @@ body {
 
 #question_screen {
 	width: 100%;
-	height:fit-content;
-	background: black;
-	background-color: black;
+	height: 100vh;
+	background-color: #000000;
 } 
+.questionContainer {
+	height: 100vh;
+	margin: 0% 5% 0% 5%;
+	color: #FFFFFF;
+}
+.col-1-question {
+	width: 100%;
+	height: 50vh;
+	float: left;
+	display : flex;
+	align-items : flex-end;
+	padding-bottom: 5vh;
+}
+.col-2-question {
+	width: 100%;
+	height: 50vh;
+	float: left;	
+}
+.checkBoxes {
+	color: white;
+	height: fit-content;
+}
+
+/* The container must be positioned relative: */
+.custom-select {
+	position: relative;
+}
+
+/*hide original SELECT element: */
+.custom-select select {
+	display: none; 
+}
+
+.select-selected { 
+	background-color: white;
+	border: 1px solid white;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+	position: absolute;
+	content: "";
+	top: 50%;
+	right: 3%;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-color: black transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+	border-color: transparent transparent black transparent;
+	top: 25%;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+	color: black;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+	position: absolute;
+	background-color: white;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+	display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+#info {
+	width: 100%;
+	height: 100vh;
+}
+.col-1-info {
+  width: 100%;
+  height: 25vh;
+  float: left;
+  background-color: #000000;
+  color: #000000;
+}
+
+.col-2-info {
+  width: 100%;
+  height: 50vh;
+  float: left;	
+  background-color: #FFFFFF;
+}
+.col-3-info {
+  width: 100%;
+  height: 25vh;
+  float: left;	
+  background-color: #000000;
+}
+
+
 
 #viz_screen {
 	width: 100%;
 	height: 100vh;
 	background: blue;
 }
+
 
 
 #closing_screen {
@@ -157,7 +264,6 @@ body {
 .col-1-closing_screen img {
   max-width: 40%;
   max-height: 40%;
-  margin: 2.5%;
 }
 .col-2-closing_screen {
   width: 100%;
@@ -176,17 +282,7 @@ body {
   justify-content: center;
 }
 
-.questionContainer {
-	height: 100vh;
-	margin-bottom: 2rem;
-	margin-left: 3rem;
-}
-.question {
-	/* height: 10rem; */
-	color: white;
-	padding-bottom: 2rem;
-	/* TODO makes this bigger font size */
-}
+
 
 #scrollButtonContainer {
     position: fixed;
@@ -194,94 +290,20 @@ body {
     justify-content: center;
 	flex-direction: column;
     display: flex;
-    /*top: 0;*/
-    /* left: 0; */
     bottom: 0;
     right: 2rem;
-	/* background-color: green; */
 }
-
 .scrollButton{
 	width: 100%;
-    /*background-color: red;*/
 	padding-top: 1rem;
 	padding-bottom: 1rem;
-	/*border: solid 1px black;*/
+	padding-left: 1rem;
+	padding-right: 1rem;
 	border-radius: 0.6rem;
 	text-align: center;
-	color: #FFFFFF
-	
+	color: #FFFFFF;
+	font-weight: bold;
 }
 .scrollButton:hover {
-	cursor: pointer;
-	/*background-color: darkred;*/
-	
+	cursor: pointer;	
 }
-
-
-.checkBoxes {
-	color: white;
-	height: fit-content;
-}
-
-/* The container must be positioned relative: */
-.custom-select {
-position: relative;
-/* font-family: Arial; */
-}
-
-/*hide original SELECT element: */
-.custom-select select {
-display: none; 
-}
-
-.select-selected { 
-background-color: white;
-border: 1px solid white;
-}
-
-/* Style the arrow inside the select element: */
-.select-selected:after {
-position: absolute;
-content: "";
-top: 14px;
-right: 10px;
-width: 0;
-height: 0;
-border: 6px solid transparent;
-border-color: black transparent transparent transparent;
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-border-color: transparent transparent black transparent;
-top: 7px;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,.select-selected {
-color: black;
-padding: 8px 16px;
-border: 1px solid transparent;
-border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-cursor: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-position: absolute;
-background-color: white;
-top: 100%;
-left: 0;
-right: 0;
-z-index: 99;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-background-color: rgba(0, 0, 0, 0.1);
-} 
