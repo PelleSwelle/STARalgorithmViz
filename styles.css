@@ -8,7 +8,30 @@
 
 @font-face {
   font-family: AdobeGaramondPro;
+  font-style: normal;
+  font-weight: normal;
   src: url("AdobeGaramondProRegular.ttf");
+}
+
+@font-face {
+  font-family: AdobeGaramondPro;
+  font-style: normal;
+  font-weight: bold;
+  src: url("AdobeGaramondProBold.ttf");
+}
+
+@font-face {
+  font-family: AdobeGaramondPro;
+  font-style: italic;
+  font-weight: normal;
+  src: url("AdobeGaramondProItalic.ttf");
+}
+
+@font-face {
+  font-family: AdobeGaramondPro;
+  font-style: italic;
+  font-weight: bold;
+  src: url("AdobeGaramondProBoldItalic.ttf");
 }
 
 
