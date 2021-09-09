@@ -192,7 +192,7 @@ function setup() {
         
         theFont = loadFont("AdobeGaramondProRegular.ttf")
         textFont(theFont);
-        textSize(currentWindowWidth/40);
+        textSize(currentWindowWidth/55);
         
         yGrid = currentWindowHeight / 6;
         row1Y = yGrid;
@@ -247,7 +247,7 @@ function draw()
     
         drawGrid();
 
-        let boxWidth = currentWindowWidth / 4;
+        let boxWidth = currentWindowWidth / 5;
     
         // // display boxes
         expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
@@ -671,7 +671,7 @@ class Box
 
     displayAnswer() {
         noStroke();
-        textSize(currentWindowWidth/50);
+        textSize(currentWindowWidth/55);
         fill(255, 255, 255, this.ansCurrentAlpha);
         textAlign(LEFT, BOTTOM);
         if (this == ageBox) {
@@ -701,11 +701,11 @@ class Box
         else {
             fill(grey);
         }
-        rect(_xpos, _ypos, _xsize, _ysize);
+        rect(_xpos, _ypos, _xsize, _ysize, 20, 0, 0, 0);
         fill(black);
         // TODO can this be according to screenwidth?
         textAlign(CENTER, CENTER);
-        textSize(currentWindowWidth/50);
+        textSize(currentWindowWidth/55);
         text(this.text, this.xpos, this.ypos);
     }
 }
