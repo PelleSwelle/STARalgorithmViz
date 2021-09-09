@@ -103,9 +103,6 @@ function main() {
     }
 
     
-    console.log("scrollPositions: " + scrollPositions);
-    let currentScrollPosition = 0;
-    
 }
 
 var canvas;
@@ -327,7 +324,9 @@ function draw() {
         if (lines[6] != null) {
             if (lines[5].hasArrived) {
                 employRateBox.updateAnswerAlpha();
-                employRateBox.displayAnswer();
+                if (employRateBox.isActive) {
+                    employRateBox.displayAnswer();
+                }
                 lines[6].update();
                 lines[6].display();
             }
@@ -353,15 +352,16 @@ function draw() {
         
         for (const box of boxes) {
             box.display();
-            if (mouseX > box.xpos - box.xsize / 2 && mouseX < box.xpos + box.xsize / 2) {
-                {
-                    if (mouseY > box.ypos - box.ysize / 2 && mouseY < box.ypos + box.ysize / 2) {
-                        rectMode(CORNER, CORNER);
-                        fill(white, 100);
-                        rect(mouseX, mouseY, 200, 100, 20);
-                    }
-                }
-            }
+            // THIS IS THE INFO BOX - NOT USED AT THE MOMENT
+            // if (mouseX > box.xpos - box.xsize / 2 && mouseX < box.xpos + box.xsize / 2) {
+            //     {
+            //         if (mouseY > box.ypos - box.ysize / 2 && mouseY < box.ypos + box.ysize / 2) {
+            //             rectMode(CORNER, CORNER);
+            //             fill(white, 100);
+            //             rect(mouseX, mouseY, 200, 100, 20);
+            //         }
+            //     }
+            // }
         }
 
     }
@@ -691,7 +691,15 @@ class Box
         textSize(20);
         fill(255, 255, 255, this.ansCurrentAlpha);
         textAlign(LEFT, BOTTOM);
-        text(this.answer, this.xpos + 10, this.ypos + vertSpacing / 2 - 10);
+        if (this == ageBox) {
+            text(this.answer + " years old", this.xpos + 10, this.ypos + vertSpacing / 2 - 10);
+        }
+        else if (this == employRateBox) {
+            text(this.answer + " / 36 months", this.xpos + 10, this.ypos + vertSpacing / 2 - 10);
+        }
+        else {
+            text(this.answer, this.xpos + 10, this.ypos + vertSpacing / 2 - 10);
+        }
     }
 
     

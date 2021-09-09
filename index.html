@@ -86,10 +86,7 @@
         <label>In which field of study were you educated? (based on your highest completed education qualification)</label>
       </div>
 
-      <!-- Surround the select box within a "custom-select" DIV element.
-        Remember to set the width: -->
       <div id="answer1a" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
         <select id="og-select">
           <option value="0">Enter answer</option>
           <option value="lowRisk">Humanities, religion or aesthetics</option>
@@ -113,7 +110,7 @@
         <label>How long do you think it will take before you get a job?</label>
       </div>
 
-      <div id="answer2" class="custom-select" style="width:400px;">
+      <div class="custom-select" style="width:400px;">
         <select id="og-select">
           <option value="0">Enter answer</option>
           <option value="lowRisk">I have a new job, but I haven't started yet</option>
@@ -134,10 +131,7 @@
         <label>Were you terminated, or did you resign, from your previous job?</label>
       </div>
 
-      <!-- Surround the select box within a "custom-select" DIV element.
-        Remember to set the width: -->
-      <div id="answer3" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="custom-select" style="width:400px;">
         <select id="og-select">
           <option>Enter answer</option>
           <option value="lowRisk">I was terminated</option>
@@ -156,8 +150,7 @@
         <label>For how long have you known that you would be unemployed?</label>
       </div>
 
-      <div id="answer4" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="custom-select" style="width:400px;">
         <select id="og-select">
           <option>I have know it for less than a week</option>
           <option>I have known it for the past month</option>
@@ -174,8 +167,7 @@
         <label>How many jobs have you applied for since you became unemployed?</label>
       </div>
 
-      <div id="answer5" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="custom-select" style="width:400px;">
         <select id="og-select">
           <option>I have not applied for any jobs</option>
           <option>I have applied for 1 job</option>
@@ -191,8 +183,7 @@
         <label>How do you assess your job opportunities in the areas where you are looking for work?</label>
       </div>
 
-      <div id="answer6" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="custom-select" style="width:400px;">
         <select id="og-select">
           <option>My job opportunities are good</option>
           <option>My job opportunities are fairly good</option>
@@ -209,8 +200,7 @@
         <label>Do you know what job you would like to have?</label>
       </div>
 
-      <div id="answer7" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div  class="custom-select" style="width:400px;">
         <select id="og-select">
           <option>I know exactly what kind of job I want</option>
           <option>I have an idea of what types of job I would like to have</option>
@@ -226,8 +216,7 @@
         <label>How do you apply for/plan to apply for jobs? (You may check multiple boxes)</label>
       </div>
 
-      <div class="checkBoxes" id="answer8" style="width:800px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="checkBoxes" style="width:800px;">
         <input type="checkbox" id="myCheck"> Responding to advertisements in newspapers, magazines, the internet, etc. <br>
         <input type="checkbox" id="myCheck"> Sending uncolicited job applications <br>
         <input type="checkbox" id="myCheck"> Contacting employers personally or by phone <br>
@@ -243,8 +232,7 @@
         <label>Which of the following considerations are you making to increase your job opportunities? (You may check multiple boxes)</label>
       </div>
 
-      <div class="checkBoxes" id="answer8" style="width:800px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="checkBoxes" style="width:800px;">
         <input type="checkbox" id="myCheck"> I am considering changing industry <br>
         <input type="checkbox" id="myCheck"> I am considering commuting long distances <br>
         <input type="checkbox" id="myCheck"> I am considering moving <br>
@@ -260,8 +248,7 @@
         <label>Is there anything that makes it difficult for you to get a job?</label>
       </div>
 
-      <div id="answer10" class="custom-select" style="width:400px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
+      <div class="custom-select" style="width:400px;">
         <select id="og-select">
           <option>Enter answer</option>
           <option>Yes</option>
@@ -272,13 +259,12 @@
     </div>
 
     <!-- QUESTION 10a -->
-    <div id="q10a" class="questionContainer">
+    <div class="questionContainer">
       <div class="question">
         <label>If yes, what is making it difficult for you to get a job? (You may check multiple boxes)</label>
       </div>
 
       <div class="checkBoxes" id="answer8" style="width:800px;">
-        <!-- this does not do anything. It only gives the custom select the content -->
         <input type="checkbox" id="myCheck"> My physical health <br>
         <input type="checkbox" id="myCheck"> My mental health <br>
         <input type="checkbox" id="myCheck"> Personal or social conditions <br>
@@ -297,15 +283,13 @@
       <p>Below information is usually provided by Danish Agency for Labour Market and Recruitment. As we do not have access to your register data, we ask that you provide this information here.</p>
     </div>
 
-    <!-- nationality -->
+    <!-- NATIONALITY -->
     <div id="q12" class="questionContainer">
       <div class="question">
         <label>What is your nationality?</label>
       </div>
 
-      <!-- Surround the select box within a "custom-select" DIV element.
-        Remember to set the width: -->
-      <div id="answer12" class="custom-select" style="width:400px;">
+      <div class="custom-select" style="width:400px;">
 
         <select id="og-select">
           <option value="0">Enter answer</option>
@@ -318,29 +302,25 @@
         </select>
       </div>
     </div>
-    <!-- TODO age -->
+    <!-- AGE -->
     <div id="q11" class="questionContainer">
       <div class="question">
         <label>How old are you?</label>
       </div>
 
-      <!-- Surround the select box within a "custom-select" DIV element.
-        Remember to set the width: -->
-      <div id="answer11" style="width:400px;">
+      <div style="width:400px;">
 
         <input id="ageInput" type="number" style="width:400px; height: 40px;" placeholder="Enter your age">
       </div>
     </div>
 
-    <!-- TODO rate of employment -->
+    <!-- EMPLOYMENT RATE  -->
     <div id="q13" class="questionContainer">
       <div class="question">
         <label>How many months out of the last 36 months have you been employed?</label>
       </div>
 
-      <!-- Surround the select box within a "custom-select" DIV element.
-        Remember to set the width: -->
-      <div id="answer13" style="width:400px;">
+      <div style="width:400px;">
         <input id="employrateInput" type="number" style="width:400px; height: 40px;" placeholder="Enter your rate of employment">
       </div>
     </div>
@@ -351,15 +331,14 @@
 
 
   <section id="viz_screen">
-    This is viz_screen
     <div id="sketch_holder">
-      <!-- this is sketch -->
+      <!-- Viz goes here -->
     </div>
   </section>
 
 
   <section id="closing_screen">
-    This is closing_screen
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit fugit quasi sit tempora harum eos non labore? Ex, odit repellendus!
   </section>
 
 
