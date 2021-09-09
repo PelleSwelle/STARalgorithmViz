@@ -2,6 +2,8 @@
 let customSelects, noOfCustomSelects, noOfOptions, stockSelects, selectedItem, optionList, optionItem, optionValue;
 let sameAsSelected, selects, previousSibling, noOfSelects, noOfSameAsSelected;
 
+let currentWindowWidth;
+let currentWindowHeight;
 
 function main() {
     /* Look for any elements with the class "custom-select": */
@@ -102,7 +104,9 @@ function main() {
         console.log("this should show the thing");
     }
 
-    
+    currentWindowWidth = window.innerWidth;
+    currentWindowHeight = window.innerHeight;
+    console.log("main is done");
 }
 
 var canvas;
@@ -155,8 +159,6 @@ let row1Y, row2Y, row3Y, row4Y, row5Y;
 
 let vertSpacing;
 
-// coordinates
-let centerX, centerY;
 
 let lineHeight = 30;
 
@@ -170,159 +172,154 @@ let expectationBox, originBox, nope2Box, yes2Box, ageBox,
 // array to hold all boxes
 let boxes;
 
-// connectors
-let connectFirstOrigin;
-let connectFirstYes;
-let connectFirstNope;
+
 let connectors = [];
 let lines = [];
 
+// coordinates
+let centerX, centerY;
+
+
 function setup() {
-    console.log("sketch setup running");
-    canvas = createCanvas(windowWidth, windowHeight);
-    canvas.parent('sketch_holder');
+        canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent('sketch_holder');
+        
+        currentWindowWidth = windowWidth;
+        currentWindowHeight = windowHeight;
+        
+        rectMode(CENTER, CENTER);
+        textAlign(CENTER, CENTER);
+        
+        theFont = loadFont("AdobeGaramondProRegular.ttf")
+        textFont(theFont);
+        textSize(currentWindowWidth/40);
+        
+        yGrid = currentWindowHeight / 6;
+        row1Y = yGrid;
+        row2Y = yGrid * 2;
+        row3Y = yGrid * 3;
+        row4Y = yGrid * 4;
+        row5Y = yGrid * 5;
     
+        
+        black = color(0, 0, 0);
+        white = color(255, 255, 255);
     
-    rectMode(CENTER, CENTER);
-    textAlign(CENTER, CENTER);
-    
-    theFont = loadFont("AdobeGaramondProRegular.ttf")
-    textFont(theFont);
-    textSize(25);
-    
-    yGrid = windowHeight / 6;
-    row1Y = yGrid;
-    row2Y = yGrid * 2;
-    row3Y = yGrid * 3;
-    row4Y = yGrid * 4;
-    row5Y = yGrid * 5;
-
-    
-    black = color(0, 0, 0);
-    white = color(255, 255, 255);
-
-    // coordinates UTIL
-    centerX = windowWidth / 2;
-    centerY = windowHeight / 2;
-    vertSpacing = windowHeight / 6;
-    
-    // instantiate the boxes
-    expectationBox = new Box(
-        centerX, row1Y, 400, 2*lineHeight, 
-        "how quickly do you believe\nthat you will get a job?", 
-        "2_dropdown");
-    
-    originBox = new Box(
-        centerX, row2Y, 200, lineHeight, 
-        "Origin", 
-        "11_dropdown");
-    
-    nope2Box = new Box(
-        centerX + width / 4, row2Y, 300, lineHeight*2, 
-        "High risk of\nlong term unemployment");
-    yes2Box = new Box(
-        centerX - width / 4, row2Y, 300, lineHeight*2, 
-        "Low risk of\nlong term unemployment");
-    
-    
-    nope3Box = new Box(
-        centerX - width / 4, row3Y, 300, lineHeight*2, 
-        "High risk of\nlong term unemployment");
-    ageBox = new Box(
-        centerX, row3Y, 200, lineHeight, 
-        "Age", 
-        "12_input");
-    
-    employRateBox = new Box(
-        centerX, row4Y, 200, lineHeight, 
-        "employment rate", 
-        "13_dropdown");
-    nope4Box = new Box(
-        centerX + width / 4, row4Y, 300, lineHeight*2, 
-        "High risk of\nlong term unemployment");
-    
-    yes5Box = new Box(
-        centerX - width / 5, row5Y, 300, lineHeight*2, 
-        "Low risk of\nlong term unemployment");
-    nope5Box = new Box(
-        centerX + width / 5, row5Y, 300, lineHeight*2, 
-        "High risk of\nlong term unemployment");
-    
-    boxes = new Array(
-        expectationBox, 
-        originBox, 
-        nope2Box, 
-        yes2Box, 
-        ageBox,
-        nope3Box,
-        employRateBox,
-        nope4Box,
-        yes5Box,
-        nope5Box
-    );
+        // // coordinates UTIL
+        centerX = currentWindowWidth / 2;
+        centerY = currentWindowHeight / 2;
+        vertSpacing = currentWindowHeight / 6;
+        
+        expectationBox = new Box("how quickly do you believe\nthat you will get a job?");
+        originBox = new Box("Origin");
+        nope2Box = new Box("High risk of\nlong term unemployment");
+        yes2Box = new Box("Low risk of\nlong term unemployment");
+        nope3Box = new Box("High risk of\nlong term unemployment");
+        ageBox = new Box("Age");
+        employRateBox = new Box("employment rate");
+        nope4Box = new Box("High risk of\nlong term unemployment");
+        yes5Box = new Box("Low risk of\nlong term unemployment");
+        nope5Box = new Box("High risk of\nlong term unemployment");    
+        console.log("sketch setup done");
 }
 
-function draw() {
-    if (vizIsVisible) {
-        
-        background(black);
-
+function draw() 
+{
+    if (vizIsVisible) 
+    {
+        background(0, 255, 255);
+        currentWindowWidth = windowWidth;
+        currentWindowHeight = windowHeight;
+        centerX = currentWindowWidth / 2;
+        // this works.
+        // resizeCanvas(currentWindowWidth, currentWindowHeight);
+    
         strokeWeight(10);
+        stroke(255, 0, 0);
     
         // display the things
-        drawGrid();
-        // calcPath();
-
+    
         textAlign(CENTER, CENTER);
         noStroke();
-        textSize(60);
         fill(white);
-        text("The STAR algorithm", centerX, 100);
+        // text("The STAR algorithm", centerX, 100);
+    
+        drawGrid();
+
+        let boxWidth = currentWindowWidth / 4;
+    
+        // // display boxes
+        expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
+        originBox.display(centerX, row2Y, boxWidth, lineHeight);
+        ageBox.display(centerX, row3Y, boxWidth, lineHeight);
+        employRateBox.display(centerX, row4Y, boxWidth, lineHeight);
+        nope2Box.display(centerX + width / 4, row2Y, boxWidth, lineHeight*2);
+        yes2Box.display(centerX - width / 4, row2Y, boxWidth, lineHeight*2);
+        nope3Box.display(centerX - width / 4, row3Y, boxWidth, lineHeight*2); 
+        nope4Box.display(centerX + width / 4, row4Y, boxWidth, lineHeight*2);
+        yes5Box.display(centerX - width / 5, row5Y, boxWidth, lineHeight*2);
+        nope5Box.display(centerX + width / 5, row5Y, boxWidth, lineHeight*2);
+    
+        
     
         // for every line
+        
+        
         lines[0].update();
         lines[0].display();
-        if (lines[1] != null) {
-            if (lines[0].hasArrived) {
+        if (lines[1] != null) 
+        {
+            if (lines[0].hasArrived) 
+            {
                 expectationBox.updateAnswerAlpha();
                 expectationBox.displayAnswer();
-
+    
                 lines[1].update();
                 lines[1].display();
             }
         }
-        if (lines[2] != null) {
-            if (lines[1].hasArrived) {
+        if (lines[2] != null) 
+        {
+            if (lines[1].hasArrived) 
+            {
                 lines[2].update();
                 lines[2].display();
             }
         }
-        if (lines[3] != null) {
-            if (lines[2].hasArrived) {
+        if (lines[3] != null) 
+        {
+            if (lines[2].hasArrived) 
+            {
                 originBox.updateAnswerAlpha();
                 originBox.displayAnswer();
-
+    
                 lines[3].update();
                 lines[3].display();
             }
         }
-        if (lines[4] != null) {
-            if (lines[3].hasArrived) {
+        if (lines[4] != null) 
+        {
+            if (lines[3].hasArrived) 
+            {
                 ageBox.updateAnswerAlpha();
                 ageBox.displayAnswer();
-
+    
                 lines[4].update();
                 lines[4].display();
             }
         }
-        if (lines[5] != null) {
-            if (lines[4].hasArrived) {
+        if (lines[5] != null) 
+        {
+            if (lines[4].hasArrived) 
+            {
                 lines[5].update();
                 lines[5].display();
             }
         }
-        if (lines[6] != null) {
-            if (lines[5].hasArrived) {
+        if (lines[6] != null) 
+        {
+            if (lines[5].hasArrived) 
+            {
                 employRateBox.updateAnswerAlpha();
                 if (employRateBox.isActive) {
                     employRateBox.displayAnswer();
@@ -331,40 +328,32 @@ function draw() {
                 lines[6].display();
             }
         }
-        if (lines[7] != null) {
-            if (lines[6].hasArrived) {
+        if (lines[7] != null) 
+        {
+            if (lines[6].hasArrived) 
+            {
                 lines[7].update();
                 lines[7].display();
             }
         }
-        if (lines[8] != null) {
-            if (lines[7].hasArrived) {
+        if (lines[8] != null) 
+        {
+            if (lines[7].hasArrived) 
+            {
                 lines[8].update();
                 lines[8].display();
             }
         }
-        if (lines[9] != null) {
-            if (lines[8].hasArrived) {
+        if (lines[9] != null) 
+        {
+            if (lines[8].hasArrived) 
+            {
                 lines[9].update();
                 lines[9].display();
             }
         }
-        
-        for (const box of boxes) {
-            box.display();
-            // THIS IS THE INFO BOX - NOT USED AT THE MOMENT
-            // if (mouseX > box.xpos - box.xsize / 2 && mouseX < box.xpos + box.xsize / 2) {
-            //     {
-            //         if (mouseY > box.ypos - box.ysize / 2 && mouseY < box.ypos + box.ysize / 2) {
-            //             rectMode(CORNER, CORNER);
-            //             fill(white, 100);
-            //             rect(mouseX, mouseY, 200, 100, 20);
-            //         }
-            //     }
-            // }
-        }
-
     }
+     
 }
 
 // This prevents the page from scrolling down to where it was previously.
@@ -530,7 +519,6 @@ function calcPath() {
         }
 
     }
-    console.log("number of lines: " + lines.length);
 }
 
 function Line(startX, startY, endX, endY) {
@@ -559,7 +547,6 @@ function Line(startX, startY, endX, endY) {
             this.dir = "right";
         }
     }
-// TODO this is where it breaks
     this.update = function() {
         // TODO adjust at the end to not overshoot
         if (this.dir == "vertical") {
@@ -595,10 +582,12 @@ function Line(startX, startY, endX, endY) {
         
         stroke(white);
         line(this.startX, this.startY, this.currentX, this.currentY);
+        // console.log("line is showing");
     }
 }
 
 function showViz() {
+    
     // set what the expectationBox needs
     expectationBox.setAnswer(document.getElementById("answer2").innerHTML);
     if (
@@ -651,26 +640,20 @@ function showViz() {
     else if (employRateBox.answer > 18) {
         employRateBox.setValue("lowRisk");
     }
-
     calcPath();
     document.getElementById("defaultCanvas0").scrollIntoView();
     vizIsVisible = true;
+    console.log("showViz is done");
 }
 
 class Box 
 {
-    constructor(_xpos, _ypos, _xsize,_ysize, _text, q) 
+    constructor(_text) 
     {
-        this.xpos = _xpos;
-        this.ypos = _ypos;
-        this.xsize = _xsize;
-        this.ysize = _ysize;
         this.text = _text;
-        this.element = q;
         this.answerFadeSpeed = 3;
         this.ansCurrentAlpha = 0;
         
-        // this.ansBox = new AnswerBox(this, this.answer, _xpos + 200, _ypos + 200);
     }
     setAnswer(_answer) {
         this.answer = _answer;
@@ -687,7 +670,7 @@ class Box
 
     displayAnswer() {
         noStroke();
-        textSize(20);
+        textSize(currentWindowWidth/50);
         fill(255, 255, 255, this.ansCurrentAlpha);
         textAlign(LEFT, BOTTOM);
         if (this == ageBox) {
@@ -702,7 +685,11 @@ class Box
     }
 
     
-    display() {
+    display(_xpos, _ypos, _xsize, _ysize) {
+        this.xpos = _xpos;
+        this.ypos = _ypos;
+        this.xsize = _xsize;
+        this.ysize = _ysize;
         noStroke();
         rectMode(CENTER, CENTER);
         
@@ -713,30 +700,28 @@ class Box
         else {
             fill(grey);
         }
-        rect(this.xpos, this.ypos, this.xsize, this.ysize, boxRounding, 1);
+        rect(_xpos, _ypos, _xsize, _ysize);
         fill(black);
         // TODO can this be according to screenwidth?
         textAlign(CENTER, CENTER);
-        textSize(20);
+        textSize(currentWindowWidth/50);
         text(this.text, this.xpos, this.ypos);
-
-        // this.ansBox.display();
     }
 }
 
-function debug() {
-    for (box of boxes) {
-        if (box.answer != null) {
-            fill(white);
-            text(box.answer, box.xpos + box.xsize / 2, box.ypos);
-        }
-    }
-    // for (var i = 0 ; i < lines.length ; i++) {
-    //     if (lines[i].hasArrived) {
-    //         lines[i].color = (255, 0, 0);
-    //     }
-    // }
-}
+// function debug() {
+//     for (box of boxes) {
+//         if (box.answer != null) {
+//             fill(white);
+//             text(box.answer, box.xpos + box.xsize / 2, box.ypos);
+//         }
+//     }
+//     // for (var i = 0 ; i < lines.length ; i++) {
+//     //     if (lines[i].hasArrived) {
+//     //         lines[i].color = (255, 0, 0);
+//     //     }
+//     // }
+// }
 
 class AnswerBox {
     constructor(parentBox, answer, xpos, ypos) {
@@ -823,6 +808,7 @@ function drawGrid() {
     line(
         nope5Box.xpos, nope5Box.ypos - vertSpacing / 2, 
         nope5Box.xpos, nope5Box.ypos);
+
 }
 
 // TODO this is supposed to eventually concatenate all the html elements into one array, that we can cycle through
@@ -982,14 +968,14 @@ function getSelectedText(elementId) {
     }
 }
 
-// TODO make why box visible if answer is yes.
 
+function windowResized() {
+    console.log("window was resized");
+    calcPath();
+    resizeCanvas(windowWidth, windowHeight);
+ }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
     main();
   });
 
-  window.addEventListener('resize', function(event) {
-      console.log(windowWidth + " x " + windowHeight);
-    resizeCanvas(windowWidth, windowHeight);
-}, true);
