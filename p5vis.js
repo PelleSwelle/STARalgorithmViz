@@ -960,7 +960,7 @@ function scrollDown() {
     }
     else if (isInViewport(document.getElementById("q12"))) {
         if (document.getElementById("ageInput").value > 120 || document.getElementById("ageInput").value < 0) {
-            document.getElementById("ageWarning").style.color= "red";
+            document.getElementById("ageWarning").style.color= "white";
         }
         else {
             document.getElementById("q13").scrollIntoView();
@@ -968,7 +968,7 @@ function scrollDown() {
     }
     else if (isInViewport(document.getElementById("q13"))) {
         if (document.getElementById("employrateInput").value < 0 || document.getElementById("employrateInput").value > 36) {
-            document.getElementById("rateWarning").style.color= "red";
+            document.getElementById("rateWarning").style.color= "white";
         }
         else {
             document.getElementById("viz_screen").scrollIntoView();
