@@ -192,7 +192,7 @@ function setup() {
         rectMode(CENTER, CENTER);
         textAlign(CENTER, CENTER);
         
-        theFont = loadFont("AdobeGaramondProRegular.ttf")
+        theFont = loadFont("fonts\AdobeGaramondProRegular.ttf")
         textFont(theFont);
         textSize(14 + 6 * ((currentWindowWidth - 320) / 680));
         
@@ -881,7 +881,12 @@ function scrollUp() {
         document.getElementById("q10").scrollIntoView();
     }
     else if (isInViewport(document.getElementById("info"))) {
-        document.getElementById("q10a").scrollIntoView();
+        if (document.getElementById("answer8").innerHTML == "Yes") {
+            document.getElementById("q10a").scrollIntoView();
+        }
+        else {
+            document.getElementById("q10").scrollIntoView();
+        }
     }
     else if (isInViewport(document.getElementById("q11"))) {
         document.getElementById("info").scrollIntoView();
@@ -937,7 +942,12 @@ function scrollDown() {
         document.getElementById("q10").scrollIntoView();
     }
     else if (isInViewport(document.getElementById("q10"))) {
-        document.getElementById("q10a").scrollIntoView();
+        if (document.getElementById("answer8").innerHTML == "Yes") {
+            document.getElementById("q10a").scrollIntoView();
+        }
+        else {
+            document.getElementById("info").scrollIntoView();
+        }
     }
     else if (isInViewport(document.getElementById("q10a"))) {
         document.getElementById("info").scrollIntoView();
