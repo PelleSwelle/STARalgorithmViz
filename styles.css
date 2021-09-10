@@ -250,7 +250,7 @@ body {
 #viz_screen {
 	width: 100%;
 	height: 100vh;
-	background: black;
+	background: #000000;
 }
 
 
@@ -264,13 +264,11 @@ body {
   width: 100%;
   height: 40vh;
   float: left;
-  display : flex;
-  align-items : center;
-  justify-content: center;
 }
 .col-1-closing_screen img {
   max-width: 40%;
   max-height: 40%;
+  margin: 5%;
 }
 .col-2-closing_screen {
   width: 100%;
@@ -278,7 +276,6 @@ body {
   float: left;
   display : flex;
   align-items : center;
-  justify-content: center;
 }
 .col-3-closing_screen {
   width: 100%;
@@ -286,7 +283,6 @@ body {
   float: left;
   display : flex;
   align-items : center;
-  justify-content: center;
 }
 
 
@@ -313,4 +309,3 @@ body {
 }
 .scrollButton:hover {
 	cursor: pointer;	
-}
