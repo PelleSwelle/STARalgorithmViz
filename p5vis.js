@@ -192,7 +192,7 @@ function setup() {
         rectMode(CENTER, CENTER);
         textAlign(CENTER, CENTER);
         
-        theFont = loadFont("fonts\AdobeGaramondProRegular.ttf")
+        theFont = loadFont("fonts/AdobeGaramondProRegular.ttf")
         textFont(theFont);
         textSize(14 + 6 * ((currentWindowWidth - 320) / 680));
         
@@ -959,17 +959,30 @@ function scrollDown() {
         document.getElementById("q12").scrollIntoView();
     }
     else if (isInViewport(document.getElementById("q12"))) {
-        document.getElementById("q13").scrollIntoView();
+        if (document.getElementById("ageInput").value > 120 || document.getElementById("ageInput").value < 0) {
+            document.getElementById("ageWarning").style.color= "red";
+        }
+        else {
+            document.getElementById("q13").scrollIntoView();
+        }
     }
     else if (isInViewport(document.getElementById("q13"))) {
-        if (document.getElementById("employrateInput").value > 0 && document.getElementById("employrateInput").value < 36) {
+        if (document.getElementById("employrateInput").value < 0 || document.getElementById("employrateInput").value > 36) {
+            document.getElementById("rateWarning").style.color= "red";
+        }
+        else {
             document.getElementById("viz_screen").scrollIntoView();
-            showViz();
+            // showViz();
         }
     }
     else if (isInViewport(document.getElementById("viz_screen"))) {
         document.getElementById("closing_screen").scrollIntoView();
     }
+}
+
+function setDefaultColor() {
+    document.getElementById("ageWarning").style.color = "black";
+    document.getElementById("rateWarning").style.color = "black";
 }
 
 
