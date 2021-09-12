@@ -730,46 +730,6 @@ class Box
     }
 }
 
-// function debug() {
-//     for (box of boxes) {
-//         if (box.answer != null) {
-//             fill(white);
-//             text(box.answer, box.xpos + box.xsize / 2, box.ypos);
-//         }
-//     }
-//     // for (var i = 0 ; i < lines.length ; i++) {
-//     //     if (lines[i].hasArrived) {
-//     //         lines[i].color = (255, 0, 0);
-//     //     }
-//     // }
-// }
-
-class AnswerBox {
-    constructor(parentBox, answer, xpos, ypos) {
-        this.parentBox = parentBox;
-        this.answer = answer;
-        this.xpos = xpos;
-        this.ypos = ypos;
-        this.startAlpha = 0;
-        this.endAlpha = 255;
-        this.currentAlpha = 0;
-
-        this.trigger = get(this.xpos - 30, this.ypos);
-    }
-
-
-    update() {
-        if (this.currentAlpha < 255) {
-            this.currentAlpha += 5;
-        }
-    }
-
-    display() {
-        fill(255, 0, 0);
-        text(this.answer, this.xpos, this.ypos);
-    }
-}
-
 function drawGrid() {
     stroke(grey);
     line(
@@ -961,6 +921,7 @@ function scrollDown() {
     }
     else if (isInViewport(document.getElementById("q11"))) {
         document.getElementById("q12").scrollIntoView();
+        document.getElementById("ageInput").focus();
     }
     else if (isInViewport(document.getElementById("q12"))) {
         checkAge();
@@ -990,16 +951,23 @@ function scrollDown() {
 
 function checkAge() {
     var enteredAge = document.getElementById("ageInput").value;
-    if (enteredAge > 0 && enteredAge < 125) {
+    if (enteredAge > 0 && enteredAge <= 125) {
         ageIsGood = true;
     }
     else {
         ageIsGood = false;
     }
 }
+// function debug() {
+//     if (isInViewport(document.getElementById("q12"))) {
+//         checkAge();
+        
+//         console.log("this is debug");
+//     }
+// }
 function checkEmployRate() {
     var enteredRate = document.getElementById("employrateInput").value;
-    if (enteredRate > 0 && enteredRate < 36) {
+    if (enteredRate >= 0 && enteredRate <= 36) {
         employRateIsGood = true;
     }
     else {
@@ -1014,25 +982,25 @@ function setDefaultColor() {
 }
 
 
-function getSelectedText(elementId) {
-    var element = document.getElementById(elementId);
+// function getSelectedText(elementId) {
+//     var element = document.getElementById(elementId);
 
-    if (element.selectedIndex == -1) {
-        return null;
-    }
-    else {
-        return element.options[element.selectedIndex].text;
-    }
-}
+//     if (element.selectedIndex == -1) {
+//         return null;
+//     }
+//     else {
+//         return element.options[element.selectedIndex].text;
+//     }
+// }
 
 
 function windowResized() {
-    console.log("window was resized");
+    console.log("window was resized to: " + document.body.clientWidth + " x " + document.body.clientHeight);
     calcPath();
     resizeCanvas(windowWidth, windowHeight);
  }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
     main();
-  });
+});
 
