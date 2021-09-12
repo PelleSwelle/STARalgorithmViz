@@ -15,7 +15,7 @@
 </head>
 
 
-<body>
+<body onscroll=" calcPath(), showViz()">
 
   <div id="scrollButtonContainer">
     <div onclick="scrollUp()" class="scrollButton" id="scrollUp">˄</div>
@@ -523,7 +523,7 @@
 		<div class="row">
 		<div class="col-2-question">
 			<div style="display:flex;">
-				<input onclick="calcPath(), showViz(), setDefaultColor()"  id="ageInput" type="number" style="width:350px; height: 40px;" min="1" max="120" placeholder="Enter your age">
+				<input onclick="setDefaultColor()"  id="ageInput" type="number" style="width:350px; height: 40px;" min="1" max="120" placeholder="Enter your age">
 				<p class="warningMessage" id="ageWarning" style="color: black;">Please enter a valid input</p>
 			</div>
 		</div>
