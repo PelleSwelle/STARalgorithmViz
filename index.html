@@ -15,7 +15,7 @@
 </head>
 
 
-<body onscroll=" calcPath(), showViz()">
+<body onscroll="displayViz(), ifOnAge()">
 
   <div id="scrollButtonContainer">
     <div onclick="scrollUp()" class="scrollButton" id="scrollUp">˄</div>
@@ -31,9 +31,8 @@
     </div>
 
     <div class="row">
-	<div class="col-2">
+	<div class="col-2" id="explainerText">
         <h1>Vizualizing the STAR unemployment algorithm</h1>
-        <!-- lorem ipsum -->
         <p>
 			This site enables you to interact with a demo of <i>The STAR algorithm</i> (from the Danish abbreviation of 
 			<i>the Danish Agency for Labour Market and Recruitment</i>, hereafter <i>STAR</i>).<br>
@@ -48,11 +47,12 @@
         </p>
     </div>
     </div>
-
+	<!-- TODO I think this is useless -->
+<!-- 
 	<div class="row">
 		<div class="col-3"></div>
 	</div>
-	
+	 -->
 	</section>
 
 	<!-- QUESTION 1 -->
@@ -69,7 +69,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div id="answer1" class="custom-select" style="width:350px;">
+			<div id="answer1" class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option value="useless">Primary education</option>
@@ -105,7 +105,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div id="answer1a" class="custom-select" style="width:350px;">
+			<div id="answer1a" class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>Humanities, religion or aesthetics</option>
@@ -143,7 +143,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option value="0">Enter answer</option>
 				<option value="lowRisk">I have a new job, but I haven't started yet</option>
@@ -178,7 +178,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>I was terminated</option>
@@ -212,7 +212,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>I have known it for less than a week</option>
@@ -244,7 +244,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>I have not applied for any jobs</option>
@@ -275,7 +275,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>My job opportunities are good</option>
@@ -307,7 +307,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div  class="custom-select" style="width:350px;">
+			<div  class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>I know exactly what kind of job I want</option>
@@ -338,7 +338,7 @@
 			
 		<div class="row">
 		<div class="col-2-question">
-			<div class="checkBoxes" style="width:800px;">
+			<div class="checkBoxes">
 				<input type="checkbox" id="myCheck"> Responding to advertisements in newspapers, magazines, the internet, etc. <br>
 				<input type="checkbox" id="myCheck"> Sending uncolicited job applications <br>
 				<input type="checkbox" id="myCheck"> Contacting employers personally or by phone <br>
@@ -368,7 +368,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="checkBoxes" style="width:800px;">
+			<div class="checkBoxes">
 				<input type="checkbox" id="myCheck"> I am considering changing industry <br>
 				<input type="checkbox" id="myCheck"> I am considering commuting long distances <br>
 				<input type="checkbox" id="myCheck"> I am considering moving <br>
@@ -398,7 +398,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option>Enter answer</option>
 				<option>Yes</option>
@@ -428,7 +428,7 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div class="checkBoxes" id="answer8" style="width:800px;">
+			<div class="checkBoxes" id="answer8">
 				<input type="checkbox" id="myCheck"> My physical health <br>
 				<input type="checkbox" id="myCheck"> My mental health <br>
 				<input type="checkbox" id="myCheck"> Personal or social conditions <br>
@@ -486,7 +486,7 @@
 
 		<div class="row">
 		<div class="col-2-question">	
-			<div class="custom-select" style="width:350px;">
+			<div class="custom-select">
 				<select id="og-select">
 				<option value="0">Enter answer</option>
 				<option value="further">Danish</option>
@@ -519,9 +519,9 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div style="display:flex;">
-				<input onclick="setDefaultColor()"  id="ageInput" type="number" style="width:350px; height: 40px;" min="1" max="120" placeholder="Enter your age">
-				<p class="warningMessage" id="ageWarning" style="color: black;">Please enter a valid input</p>
+			<div>
+				<input onclick="setDefaultColor()"  id="ageInput" type="number" style="width:30vw; height: 40px;" min="1" max="120" placeholder="Enter your age">
+				<p class="warningMessage" id="ageWarning">Please enter a valid input</p>
 			</div>
 		</div>
 		</div>
@@ -545,9 +545,12 @@
 
 		<div class="row">
 		<div class="col-2-question">
-			<div style="display: flex;">
-				<input onclick="calcPath(),   showViz(), setDefaultColor()" id="employrateInput" type="number" min="0" max="36" style="width:350px; height: 40px;" placeholder="Enter your rate of employment">
-				<p class="warningMessage" id="rateWarning" style="color: black;">Please enter a valid input</p>
+			<div>
+				<input onclick="displayViz(), setDefaultColor()" id="employrateInput" type="number" min="0" max="36" style="width:30vw; height: 40px;" placeholder="Enter your rate of employment">
+				
+				<p class="warningMessage" id="rateWarning">
+					Please enter a valid input
+				</p>
 			</div>
 		</div>
 		</div>

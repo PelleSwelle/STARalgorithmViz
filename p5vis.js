@@ -229,16 +229,7 @@ function setup() {
         nope5Box = new Box("High risk of\nlong term unemployment");    
         console.log("sketch setup done");
 
-        expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
-        originBox.display(centerX, row2Y, boxWidth, lineHeight);
-        ageBox.display(centerX, row3Y, boxWidth, lineHeight);
-        employRateBox.display(centerX, row4Y, boxWidth, lineHeight);
-        nope2Box.display(centerX + width / 4, row2Y, boxWidth, lineHeight*2);
-        yes2Box.display(centerX - width / 4, row2Y, boxWidth, lineHeight*2);
-        nope3Box.display(centerX - width / 4, row3Y, boxWidth, lineHeight*2); 
-        nope4Box.display(centerX + width / 4, row4Y, boxWidth, lineHeight*2);
-        yes5Box.display(centerX - width / 5, row5Y, boxWidth, lineHeight*2);
-        nope5Box.display(centerX + width / 5, row5Y, boxWidth, lineHeight*2);
+        displayBoxes();
 }
 
 function draw() 
@@ -264,8 +255,8 @@ function draw()
     
         drawGrid();
         
-        boxWidth = 300 + 6 * ((currentWindowWidth - 320) / 680)
-        
+        // boxWidth = 100 + 6 * ((currentWindowWidth - 320) / 680)
+        boxWidth = currentWindowWidth / 6;
     
     
         // for every line
@@ -360,17 +351,7 @@ function draw()
         }
     }
 
-        // // display boxes
-        expectationBox.display(centerX, row1Y, boxWidth, 2*lineHeight);
-        originBox.display(centerX, row2Y, boxWidth, lineHeight);
-        ageBox.display(centerX, row3Y, boxWidth, lineHeight);
-        employRateBox.display(centerX, row4Y, boxWidth, lineHeight);
-        nope2Box.display(centerX + width / 4, row2Y, boxWidth, lineHeight*2);
-        yes2Box.display(centerX - width / 4, row2Y, boxWidth, lineHeight*2);
-        nope3Box.display(centerX - width / 4, row3Y, boxWidth, lineHeight*2); 
-        nope4Box.display(centerX + width / 4, row4Y, boxWidth, lineHeight*2);
-        yes5Box.display(centerX - width / 5, row5Y, boxWidth, lineHeight*2);
-        nope5Box.display(centerX + width / 5, row5Y, boxWidth, lineHeight*2);
+    displayBoxes();
      
 }
 
@@ -382,7 +363,7 @@ if ('scrollRestoration' in history) {
 window.scrollTo(0,0);
 
 
-
+// ************************ P5 ****************************
 function calcPath() {
     // always start with resetting
     lines.length = 0;
@@ -532,6 +513,7 @@ function calcPath() {
                             yes5Box.xpos, yes5Box.ypos
                         )
                     )
+                    nope5Box.isActive = false;
                     yes5Box.isActive = true;
                 }
             }
@@ -539,6 +521,148 @@ function calcPath() {
         }
 
     }
+}
+
+
+class Box 
+{
+    constructor(_text) 
+    {
+        this.text = _text;
+        this.answerFadeSpeed = 3;
+        this.ansCurrentAlpha = 0;
+        
+    }
+    setAnswer(_answer) {
+        this.answer = _answer;
+    }
+    setValue(_value) {
+        this.value = _value;
+    }
+
+    updateAnswerAlpha() {
+        if (this.ansCurrentAlpha < 255) {
+            this.ansCurrentAlpha += this.answerFadeSpeed;
+        }
+    }
+
+    displayAnswer() {
+        noStroke();
+        // textSize(6 + 6 * ((currentWindowWidth - 320) / 680));
+        textSize(currentWindowWidth / 100);
+        fill(255, 255, 255, this.ansCurrentAlpha);
+        textAlign(LEFT, BOTTOM);
+        if (this == ageBox) {
+            text("You entered: " + this.answer + " years old", this.xpos + 10, this.ypos + vertSpacing / 2 - 8);
+        }
+        else if (this == employRateBox) {
+            text("You entered: " + this.answer + " / 36 months", this.xpos + 10, this.ypos + vertSpacing / 2 - 8);
+        }
+        else {
+            text("You entered: " + this.answer, this.xpos + 10, this.ypos + vertSpacing / 2 - 8);
+        }
+    }
+
+    
+    display(_xpos, _ypos, _xsize, _ysize) {
+        this.xpos = _xpos;
+        this.ypos = _ypos;
+        this.xsize = _xsize;
+        this.ysize = _ysize;
+        noStroke();
+        rectMode(CENTER, CENTER);
+        
+        // is this an active box?
+        if (this.isActive) {
+            fill(white);
+        }
+        else {
+            fill(grey);
+        }
+        rect(_xpos, _ypos, _xsize, _ysize, 20, 0, 0, 0);
+        fill(black);
+        // TODO can this be according to screenwidth?
+        textAlign(CENTER, CENTER);
+        // textSize(10 + 6 * ((currentWindowWidth - 320) / 680));
+        textSize(currentWindowWidth / 50);
+        text(this.text, this.xpos, this.ypos);
+    }
+}
+
+function drawGrid() {
+    stroke(grey);
+    line(
+        expectationBox.xpos, expectationBox.ypos, 
+        expectationBox.xpos, expectationBox.ypos + vertSpacing /2);
+    line(
+        expectationBox.xpos, expectationBox.ypos + vertSpacing /2, 
+        originBox.xpos, originBox.ypos);
+    line(
+        expectationBox.xpos, expectationBox.ypos + vertSpacing /2, 
+        yes2Box.xpos, yes2Box.ypos - vertSpacing / 2);
+    line(
+        expectationBox.xpos, expectationBox.ypos + vertSpacing /2, 
+        nope2Box.xpos, nope2Box.ypos - vertSpacing / 2);
+    line(
+        nope2Box.xpos, nope2Box.ypos - vertSpacing / 2, 
+        nope2Box.xpos, nope2Box.ypos);
+    line(
+        yes2Box.xpos, yes2Box.ypos - vertSpacing / 2, 
+        yes2Box.xpos, yes2Box.ypos);
+    line(
+        originBox.xpos, originBox.ypos, 
+        originBox.xpos, originBox.ypos + vertSpacing / 2);
+    line(
+        originBox.xpos, originBox.ypos + vertSpacing / 2, 
+        ageBox.xpos, ageBox.ypos);
+    line(
+        originBox.xpos, originBox.ypos + vertSpacing / 2, 
+        nope3Box.xpos, nope3Box.ypos - vertSpacing / 2);
+    line(
+        nope3Box.xpos, nope3Box.ypos - vertSpacing / 2, 
+        nope3Box.xpos, nope3Box.ypos);
+    line(
+        ageBox.xpos, ageBox.ypos, 
+        ageBox.xpos, ageBox.ypos + vertSpacing/2);
+    line(
+        ageBox.xpos, ageBox.ypos + vertSpacing/2, 
+        nope4Box.xpos, nope4Box.ypos - vertSpacing / 2);
+    line(
+        nope4Box.xpos, nope4Box.ypos - vertSpacing / 2, 
+        nope4Box.xpos, nope4Box.ypos);
+    line(
+        ageBox.xpos, ageBox.ypos + vertSpacing/2, 
+        employRateBox.xpos, employRateBox.ypos);
+    line(
+        employRateBox.xpos, employRateBox.ypos, 
+        employRateBox.xpos, employRateBox.ypos + vertSpacing / 2);
+    line(
+        employRateBox.xpos, employRateBox.ypos + vertSpacing / 2, 
+        yes5Box.xpos, yes5Box.ypos - vertSpacing / 2);
+    line(
+        employRateBox.xpos, employRateBox.ypos + vertSpacing / 2, 
+        nope5Box.xpos, nope5Box.ypos - vertSpacing / 2);
+    line(
+        yes5Box.xpos, yes5Box.ypos - vertSpacing / 2, 
+        yes5Box.xpos, yes5Box.ypos);
+    line(
+        nope5Box.xpos, nope5Box.ypos - vertSpacing / 2, 
+        nope5Box.xpos, nope5Box.ypos);
+
+}
+
+function displayBoxes() {
+    var extraSpace = 40;
+    expectationBox.display(centerX, row1Y, boxWidth + 100, 2*lineHeight);
+        originBox.display(centerX, row2Y, boxWidth-30, lineHeight);
+        ageBox.display(centerX, row3Y, boxWidth-30, lineHeight);
+        employRateBox.display(centerX, row4Y, boxWidth + extraSpace, lineHeight);
+        nope2Box.display(centerX + width / 4, row2Y, boxWidth + extraSpace, lineHeight*2);
+        yes2Box.display(centerX - width / 4, row2Y, boxWidth + extraSpace, lineHeight*2);
+        nope3Box.display(centerX - width / 4, row3Y, boxWidth + extraSpace, lineHeight*2); 
+        nope4Box.display(centerX + width / 4, row4Y, boxWidth + extraSpace, lineHeight*2);
+        yes5Box.display(centerX - width / 5, row5Y, boxWidth + extraSpace, lineHeight*2);
+        nope5Box.display(centerX + width / 5, row5Y, boxWidth + extraSpace, lineHeight*2);
 }
 
 function Line(startX, startY, endX, endY) {
@@ -606,8 +730,8 @@ function Line(startX, startY, endX, endY) {
     }
 }
 
-function showViz() {
-    
+// take all answers and set the values of the boxes
+function setvalues() {
     // set what the expectationBox needs
     expectationBox.setAnswer(document.getElementById("answer2").innerHTML);
     if (
@@ -653,7 +777,7 @@ function showViz() {
     }
 
     employRateBox.setAnswer(document.getElementById("employrateInput").value);
-    if (employRateBox.value != null) {
+    if (employRateBox.answer != null) {
         if (employRateBox.answer < 3) {
             employRateBox.setValue("atRisk");
         }
@@ -661,150 +785,56 @@ function showViz() {
             employRateBox.setValue("lowRisk");
         }
     }
-
-    calcPath();
-    vizIsVisible = true;
-    console.log("showViz is done");
 }
 
+function displayViz() {
+    calcPath();
+    vizIsVisible = true;
+}
+
+
+// ************** INPUT **************
+function checkAge() {
+    var enteredAge = document.getElementById("ageInput").value;
+    if (enteredAge > 0 && enteredAge <= 125) {
+        ageIsGood = true;
+    }
+    else {
+        ageIsGood = false;
+    }
+}
+
+function checkEmployRate() {
+    var enteredRate = document.getElementById("employrateInput").value;
+    if (enteredRate >= 0 && enteredRate <= 36) {
+        employRateIsGood = true;
+    }
+    else {
+        employRateIsGood = false;
+    }
+}
+
+
+function setDefaultColor() {
+    document.getElementById("ageWarning").style.color = "black";
+    document.getElementById("rateWarning").style.color = "black";
+}
+
+
+function windowResized() {
+    console.log("window was resized to: " + document.body.clientWidth + " x " + document.body.clientHeight);
+    calcPath();
+    resizeCanvas(document.body.clientWidth, document.body.clientHeight);
+ }
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+    main();
+});
+
+// ************** SCROLLING **************
 function scrollToSketch() {
     document.getElementById("defaultCanvas0").scrollIntoView();
 }
-
-class Box 
-{
-    constructor(_text) 
-    {
-        this.text = _text;
-        this.answerFadeSpeed = 3;
-        this.ansCurrentAlpha = 0;
-        
-    }
-    setAnswer(_answer) {
-        this.answer = _answer;
-    }
-    setValue(_value) {
-        this.value = _value;
-    }
-
-    updateAnswerAlpha() {
-        if (this.ansCurrentAlpha < 255) {
-            this.ansCurrentAlpha += this.answerFadeSpeed;
-        }
-    }
-
-    displayAnswer() {
-        noStroke();
-        textSize(6 + 6 * ((currentWindowWidth - 320) / 680));
-        fill(255, 255, 255, this.ansCurrentAlpha);
-        textAlign(LEFT, BOTTOM);
-        if (this == ageBox) {
-            text("You entered: " + this.answer + " years old", this.xpos + 10, this.ypos + vertSpacing / 2 - 8);
-        }
-        else if (this == employRateBox) {
-            text("You entered: " + this.answer + " / 36 months", this.xpos + 10, this.ypos + vertSpacing / 2 - 8);
-        }
-        else {
-            text("You entered: " + this.answer, this.xpos + 10, this.ypos + vertSpacing / 2 - 8);
-        }
-    }
-
-    
-    display(_xpos, _ypos, _xsize, _ysize) {
-        this.xpos = _xpos;
-        this.ypos = _ypos;
-        this.xsize = _xsize;
-        this.ysize = _ysize;
-        noStroke();
-        rectMode(CENTER, CENTER);
-        
-        // is this an active box?
-        if (this.isActive) {
-            fill(white);
-        }
-        else {
-            fill(grey);
-        }
-        rect(_xpos, _ypos, _xsize, _ysize, 20, 0, 0, 0);
-        fill(black);
-        // TODO can this be according to screenwidth?
-        textAlign(CENTER, CENTER);
-        textSize(10 + 6 * ((currentWindowWidth - 320) / 680));
-        text(this.text, this.xpos, this.ypos);
-    }
-}
-
-function drawGrid() {
-    stroke(grey);
-    line(
-        expectationBox.xpos, expectationBox.ypos, 
-        expectationBox.xpos, expectationBox.ypos + vertSpacing /2);
-    line(
-        expectationBox.xpos, expectationBox.ypos + vertSpacing /2, 
-        originBox.xpos, originBox.ypos);
-    line(
-        expectationBox.xpos, expectationBox.ypos + vertSpacing /2, 
-        yes2Box.xpos, yes2Box.ypos - vertSpacing / 2);
-    line(
-        expectationBox.xpos, expectationBox.ypos + vertSpacing /2, 
-        nope2Box.xpos, nope2Box.ypos - vertSpacing / 2);
-    line(
-        nope2Box.xpos, nope2Box.ypos - vertSpacing / 2, 
-        nope2Box.xpos, nope2Box.ypos);
-    line(
-        yes2Box.xpos, yes2Box.ypos - vertSpacing / 2, 
-        yes2Box.xpos, yes2Box.ypos);
-    line(
-        originBox.xpos, originBox.ypos, 
-        originBox.xpos, originBox.ypos + vertSpacing / 2);
-    line(
-        originBox.xpos, originBox.ypos + vertSpacing / 2, 
-        ageBox.xpos, ageBox.ypos);
-    line(
-        originBox.xpos, originBox.ypos + vertSpacing / 2, 
-        nope3Box.xpos, nope3Box.ypos - vertSpacing / 2);
-    line(
-        nope3Box.xpos, nope3Box.ypos - vertSpacing / 2, 
-        nope3Box.xpos, nope3Box.ypos);
-    line(
-        ageBox.xpos, ageBox.ypos, 
-        ageBox.xpos, ageBox.ypos + vertSpacing/2);
-    line(
-        ageBox.xpos, ageBox.ypos + vertSpacing/2, 
-        nope4Box.xpos, nope4Box.ypos - vertSpacing / 2);
-    line(
-        nope4Box.xpos, nope4Box.ypos - vertSpacing / 2, 
-        nope4Box.xpos, nope4Box.ypos);
-    line(
-        ageBox.xpos, ageBox.ypos + vertSpacing/2, 
-        employRateBox.xpos, employRateBox.ypos);
-    line(
-        employRateBox.xpos, employRateBox.ypos, 
-        employRateBox.xpos, employRateBox.ypos + vertSpacing / 2);
-    line(
-        employRateBox.xpos, employRateBox.ypos + vertSpacing / 2, 
-        yes5Box.xpos, yes5Box.ypos - vertSpacing / 2);
-    line(
-        employRateBox.xpos, employRateBox.ypos + vertSpacing / 2, 
-        nope5Box.xpos, nope5Box.ypos - vertSpacing / 2);
-    line(
-        yes5Box.xpos, yes5Box.ypos - vertSpacing / 2, 
-        yes5Box.xpos, yes5Box.ypos);
-    line(
-        nope5Box.xpos, nope5Box.ypos - vertSpacing / 2, 
-        nope5Box.xpos, nope5Box.ypos);
-
-}
-
-var isInViewport = function (elem) {
-    var bounding = elem.getBoundingClientRect();
-    return (
-        bounding.top >= 0 &&
-        bounding.left >= 0 &&
-        // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-};
 
 function scrollUp() {
     
@@ -923,7 +953,6 @@ function scrollDown() {
     document.getElementById("q11").scrollIntoView();
 }
     else if (isInViewport(document.getElementById("q11"))) {
-        console.log("scrolling from origin to age");
         document.getElementById("q12").scrollIntoView();
         // document.getElementById("ageInput").focus();
     }
@@ -931,7 +960,7 @@ function scrollDown() {
         checkAge();
         if (!ageIsGood) {
             console.log("age is not good");
-            document.getElementById("ageWarning").style.color= "white";
+            displayAgeWarning();
         }
         else {
             console.log("age is good");
@@ -954,53 +983,23 @@ function scrollDown() {
     }
 }
 
-function checkAge() {
-    var enteredAge = document.getElementById("ageInput").value;
-    if (enteredAge > 0 && enteredAge <= 125) {
-        ageIsGood = true;
-    }
-    else {
-        ageIsGood = false;
+function displayAgeWarning() {
+    document.getElementById("ageWarning").style.color= "white";
+}
+
+function ifOnAge() {
+    console.log("scrolled");
+    if (isInViewport(document.getElementById("q12"))) {
+        checkAge();
     }
 }
 
-
-function checkEmployRate() {
-    var enteredRate = document.getElementById("employrateInput").value;
-    if (enteredRate >= 0 && enteredRate <= 36) {
-        employRateIsGood = true;
-    }
-    else {
-        employRateIsGood = false;
-    }
-}
-
-
-function setDefaultColor() {
-    document.getElementById("ageWarning").style.color = "black";
-    document.getElementById("rateWarning").style.color = "black";
-}
-
-
-// function getSelectedText(elementId) {
-//     var element = document.getElementById(elementId);
-
-//     if (element.selectedIndex == -1) {
-//         return null;
-//     }
-//     else {
-//         return element.options[element.selectedIndex].text;
-//     }
-// }
-
-
-function windowResized() {
-    console.log("window was resized to: " + document.body.clientWidth + " x " + document.body.clientHeight);
-    calcPath();
-    resizeCanvas(document.body.clientWidth, document.body.clientHeight);
- }
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-    main();
-});
-
+var isInViewport = function (elem) {
+    var bounding = elem.getBoundingClientRect();
+    return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
