@@ -23,6 +23,14 @@
 	height: fit-content;
 	max-height: 73vh;
 }
+#resetButton {
+	background-color: white;
+	color: black;
+	font-family: AdobeGaramondPro;
+	padding: 1vw;
+	border-radius: 2px;
+	margin-left: 5%;
+}
 
 @font-face {
   font-family: AdobeGaramondPro;

@@ -1026,3 +1026,6 @@ var isInViewport = function (elem) {
         bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
 };
+function resetAll() {
+    window.location.reload();
+}
