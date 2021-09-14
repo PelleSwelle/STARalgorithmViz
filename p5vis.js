@@ -161,7 +161,7 @@ let row1Y, row2Y, row3Y, row4Y, row5Y;
 let vertSpacing;
 
 
-let lineHeight = 30;
+let lineHeight;
 
 
 let boxRounding = 40;
@@ -253,6 +253,8 @@ function draw()
         // text("The STAR algorithm", centerX, 100);
     
         drawGrid();
+
+        lineHeight = currentWindowHeight / 25;
         
         // boxWidth = 100 + 6 * ((currentWindowWidth - 320) / 680)
         boxWidth = currentWindowWidth / 6;
@@ -547,8 +549,14 @@ class Box
 
     displayAnswer() {
         noStroke();
-        // textSize(6 + 6 * ((currentWindowWidth - 320) / 680));
-        textSize(currentWindowWidth / 100);
+        
+        if (currentWindowWidth > 800) {
+            textSize(currentWindowWidth / 70);
+        }
+        else {
+            textSize(currentWindowWidth / 45);
+        }
+        
         fill(255, 255, 255, this.ansCurrentAlpha);
         textAlign(LEFT, BOTTOM);
         if (this == ageBox) {
@@ -583,7 +591,12 @@ class Box
         // TODO can this be according to screenwidth?
         textAlign(CENTER, CENTER);
         // textSize(10 + 6 * ((currentWindowWidth - 320) / 680));
-        textSize(currentWindowWidth / 50);
+        if (currentWindowWidth > 800) {
+            textSize(currentWindowWidth / 60);
+        }
+        else {
+            textSize(currentWindowWidth / 40);
+        }
         text(this.text, this.xpos, this.ypos);
     }
 }
@@ -1027,5 +1040,6 @@ var isInViewport = function (elem) {
     );
 };
 function resetAll() {
-    window.location.reload();
+    window.location.reload(true);
+    document.refresh();
 }
