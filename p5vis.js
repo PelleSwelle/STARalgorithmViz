@@ -34,7 +34,6 @@ function main() {
             optionValue = optionItem.setAttribute("value", j);
             // get the option from the original select and make a div with that
             optionItem.innerHTML = stockSelects.options[j].innerHTML;
-            // console.log(this.value);
             optionItem.addEventListener("click", function(e) {
                 /* When an item is clicked, update the original select box,
                 and the selected item: */
@@ -49,7 +48,7 @@ function main() {
                         previousSibling.innerHTML = this.innerHTML;
 
                         // TODO this is how we get the answer.
-                        console.log("answer" + i + ": " + this.innerHTML);
+                        // console.log("answer" + i + ": " + this.innerHTML);
                         // it does not have a value. only a div
                         sameAsSelected = this.parentNode.getElementsByClassName("same-as-selected");
                         noOfSameAsSelected = sameAsSelected.length;
@@ -103,7 +102,7 @@ function main() {
     document.addEventListener("click", closeAllSelect);
     
     if (document.getElementById("answer8").innerHTML == "Yes") {
-        console.log("this should show the thing");
+        // TODO this should show the thing
     }
 
     currentWindowWidth = window.innerWidth;
@@ -654,9 +653,9 @@ function drawGrid() {
 function displayBoxes() {
     var extraSpace = 40;
     expectationBox.display(centerX, row1Y, boxWidth + 100, 2*lineHeight);
-        originBox.display(centerX, row2Y, boxWidth-30, lineHeight);
-        ageBox.display(centerX, row3Y, boxWidth-30, lineHeight);
-        employRateBox.display(centerX, row4Y, boxWidth + extraSpace, lineHeight);
+        originBox.display(centerX, row2Y, boxWidth-20, lineHeight);
+        ageBox.display(centerX, row3Y, boxWidth-20, lineHeight);
+        employRateBox.display(centerX, row4Y, boxWidth + 10, lineHeight);
         nope2Box.display(centerX + width / 4, row2Y, boxWidth + extraSpace, lineHeight*2);
         yes2Box.display(centerX - width / 4, row2Y, boxWidth + extraSpace, lineHeight*2);
         nope3Box.display(centerX - width / 4, row3Y, boxWidth + extraSpace, lineHeight*2); 
@@ -726,12 +725,11 @@ function Line(startX, startY, endX, endY) {
         
         stroke(white);
         line(this.startX, this.startY, this.currentX, this.currentY);
-        // console.log("line is showing");
     }
 }
 
 // take all answers and set the values of the boxes
-function setvalues() {
+function setValues() {
     // set what the expectationBox needs
     expectationBox.setAnswer(document.getElementById("answer2").innerHTML);
     if (
@@ -739,20 +737,21 @@ function setvalues() {
         expectationBox.answer == "Within 1 month" ||
         expectationBox.answer == "Within 3 months") {
             expectationBox.setValue("lowRisk");
-    }
-    else if (
-        expectationBox.answer == "It will be more than 6 months" ||
-        expectationBox.answer == "I expect to go on maternity leave soon" ||
-        expectationBox.answer == "I expect to retire soon") {
-            expectationBox.setValue("atRisk");
-    }
-    else if (
-        expectationBox.answer == "Within 6 months" || 
-        expectationBox.answer == "Don't know") {
-            expectationBox.setValue("further");
-    }
-
-
+        }
+        else if (
+            expectationBox.answer == "It will be more than 6 months" ||
+            expectationBox.answer == "I expect to go on maternity leave soon" ||
+            expectationBox.answer == "I expect to retire soon") {
+                expectationBox.setValue("atRisk");
+            }
+            else if (
+                expectationBox.answer == "Within 6 months" || 
+                expectationBox.answer == "Don't know") {
+                    expectationBox.setValue("further");
+                }
+                
+                
+                
     
     originBox.setAnswer(document.getElementById("answer9").innerHTML);
     if (
@@ -785,6 +784,19 @@ function setvalues() {
             employRateBox.setValue("lowRisk");
         }
     }
+
+    var _boxes = [
+        expectationBox,
+        originBox,
+        ageBox,
+        employRateBox
+    ];
+
+    for (var _box of _boxes) {
+        console.log(_box + ": " + _box.value);
+    }
+
+    
 }
 
 function displayViz() {
@@ -903,6 +915,18 @@ function scrollUp() {
         document.getElementById("viz_screen").scrollIntoView();
     }
 }
+
+function displaySpecify() {
+    var otherDifficulty = document.getElementById("otherDifficulty");
+    var specifyBox = document.getElementById("specifyDifficulty");
+    if (otherDifficulty.checked) {
+        specifyBox.style.visibility = "visible";
+    }
+    else {
+        specifyBox.style.visibility = "hidden";
+        specifyBox.value = "";
+    }
+}
     
 function scrollDown() {
     if (isInViewport(document.getElementById("opening_screen"))) {
@@ -965,7 +989,6 @@ function scrollDown() {
         else {
             console.log("age is good");
             document.getElementById("q13").scrollIntoView();
-            console.log("scrolling from age to employmentrate");
         }
     }
     else if (isInViewport(document.getElementById("q13"))) {
@@ -988,7 +1011,7 @@ function displayAgeWarning() {
 }
 
 function ifOnAge() {
-    console.log("scrolled");
+    // console.log("scrolled");
     if (isInViewport(document.getElementById("q12"))) {
         checkAge();
     }

@@ -15,7 +15,7 @@
 </head>
 
 
-<body onscroll="displayViz(), ifOnAge()">
+<body onscroll="setValues(), displayViz(), ifOnAge()">
 
   <div id="scrollButtonContainer">
     <div onclick="scrollUp()" class="scrollButton" id="scrollUp">˄</div>
@@ -429,15 +429,16 @@
 		<div class="row">
 		<div class="col-2-question">
 			<div class="checkBoxes" id="answer8">
-				<input type="checkbox" id="myCheck"> My physical health <br>
-				<input type="checkbox" id="myCheck"> My mental health <br>
-				<input type="checkbox" id="myCheck"> Personal or social conditions <br>
-				<input type="checkbox" id="myCheck"> Financial conditions <br>
-				<input type="checkbox" id="myCheck"> Alcohol addication or drug abuse <br>
-				<input type="checkbox" id="myCheck"> Lack of reading, spelling or math skills <br>
-				<input type="checkbox" id="myCheck"> Lack of IT skills <br>
-				<input type="checkbox" id="myCheck"> Language Barriers <br>
-				<input type="checkbox" id="myCheck"> Other, please specify <br>
+				<input type="checkbox"> My physical health <br>
+				<input type="checkbox"> My mental health <br>
+				<input type="checkbox"> Personal or social conditions <br>
+				<input type="checkbox"> Financial conditions <br>
+				<input type="checkbox"> Alcohol addication or drug abuse <br>
+				<input type="checkbox"> Lack of reading, spelling or math skills <br>
+				<input type="checkbox"> Lack of IT skills <br>
+				<input type="checkbox"> Language Barriers <br>
+				<input type="checkbox" id="otherDifficulty" onclick="displaySpecify()"> Other, please specify <br>
+				<input type="text" id="specifyDifficulty" style="visibility:hidden; font-family: AdobeGaramondPro;" placeholder="specify here"><br>
 			</div>
 		</div>
 		</div>
