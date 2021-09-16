@@ -5,7 +5,7 @@ let sameAsSelected, selects, previousSibling, noOfSelects, noOfSameAsSelected;
 let currentWindowWidth;
 let currentWindowHeight;
 let boxWidth;
-let ageIsGood, employRateIsGood;
+let expectationIsGood, originIsGood, ageIsGood, employRateIsGood;
 
 function main() {
     /* Look for any elements with the class "custom-select": */
@@ -184,6 +184,7 @@ let centerX, centerY;
 function setup() {
         // canvas = createCanvas(windowWidth, windowHeight);
         canvas = createCanvas(document.body.clientWidth, window.innerHeight);
+        console.log("canvas.width: " + canvas.width + " Canvas.height: " + canvas.height);
         canvas.parent('sketch_holder');
         background(black);
         
@@ -235,6 +236,7 @@ function draw()
 {
     if (vizIsVisible) 
     {
+        console.log("Canvas is : " + document.body.clien);
         background(black);
         currentWindowWidth = windowWidth;
         currentWindowHeight = windowHeight;
@@ -522,6 +524,7 @@ function calcPath() {
         }
 
     }
+    console.log("calculated path");
 }
 
 
@@ -812,13 +815,27 @@ function setValues() {
     
 }
 
-function displayViz() {
-    calcPath();
-    vizIsVisible = true;
-}
+
 
 
 // ************** INPUT **************
+function checkExpectation() {
+    if (document.getElementById("answer2").innerHTML != "Enter answer") {
+        expectationIsGood = true;
+    }   
+    else {
+        expectationIsGood = false;
+    }
+}
+function checkOrigin() {
+    if (document.getElementById("answer9").innerHTML != "Enter answer") {
+        originIsGood = true;
+    }   
+    else {
+        originIsGood = false;
+    }
+}
+
 function checkAge() {
     var enteredAge = document.getElementById("ageInput").value;
     if (enteredAge > 0 && enteredAge <= 125) {
@@ -848,8 +865,11 @@ function setDefaultColor() {
 
 function windowResized() {
     console.log("window was resized to: " + document.body.clientWidth + " x " + document.body.clientHeight);
-    calcPath();
-    resizeCanvas(document.body.clientWidth, document.body.clientHeight);
+    // runViz();
+    if (vizIsVisible) {
+        calcPath();
+        resizeCanvas(document.body.clientWidth, document.body.clientHeight);
+    }
  }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -920,6 +940,9 @@ function scrollUp() {
     }
     else if (isInViewport(document.getElementById("q13"))) {
         document.getElementById("q12").scrollIntoView();
+    }
+    else if (isInViewport(document.getElementById("enterButton"))) {
+        document.getElementById("q13").scrollIntoView();
     }
     else if (isInViewport(document.getElementById("viz_screen"))) {
         document.getElementById("q13").scrollIntoView();
@@ -1010,10 +1033,14 @@ function scrollDown() {
             document.getElementById("rateWarning").style.color= "white";
         }
         else {
-            document.getElementById("viz_screen").scrollIntoView();
-            showViz();
+            document.getElementById("enter_screen").scrollIntoView();
+            // displayViz();
         }
     }
+    else if (isInViewport(document.getElementById("enterButton"))) {
+        document.getElementById("viz_screen").scrollIntoView();
+    }
+
     else if (isInViewport(document.getElementById("viz_screen"))) {
         document.getElementById("closing_screen").scrollIntoView();
     }
@@ -1027,6 +1054,32 @@ function ifOnAge() {
     // console.log("scrolled");
     if (isInViewport(document.getElementById("q12"))) {
         checkAge();
+    }
+}
+
+
+function runViz() {
+    checkExpectation();
+    checkOrigin();
+    checkAge();
+    checkEmployRate();
+    if (!expectationIsGood) {
+        document.getElementById("q2").scrollIntoView();
+    }
+    else if (!originIsGood) {
+        document.getElementById("q11").scrollIntoView();
+    }
+    else if (!ageIsGood) {
+        document.getElementById("q12").scrollIntoView();
+    }
+    else if (!employRateIsGood) {
+        document.getElementById("q13").scrollIntoView();
+    }
+    else {
+        vizIsVisible = true;
+        setValues();
+        calcPath();
+        document.getElementById("viz_screen").scrollIntoView();
     }
 }
 

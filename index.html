@@ -16,7 +16,8 @@
 </head>
 
 
-<body onscroll="setValues(), displayViz(), ifOnAge()">
+<body onscroll="ifOnAge()">
+<!-- <body ifOnAge()"> -->
 
   <div id="scrollButtonContainer">
     <div onclick="scrollUp()" class="scrollButton" id="scrollUp">˄</div>
@@ -519,6 +520,7 @@
 		</div>
 		</div>
 
+ 
 		<div class="row">
 		<div class="col-2-question">
 			<div>
@@ -548,7 +550,7 @@
 		<div class="row">
 		<div class="col-2-question">
 			<div>
-				<input onclick="displayViz(), setDefaultColor()" id="employrateInput" type="number" min="0" max="36" style="width:30vw; height: 40px;" placeholder="Enter your rate of employment">
+				<input onclick="setDefaultColor()" id="employrateInput" type="number" min="0" max="36" style="width:30vw; height: 40px;" placeholder="Enter your rate of employment">
 				
 				<p class="warningMessage" id="rateWarning">
 					Please enter a valid input
@@ -558,6 +560,12 @@
 		</div>
 	  
     </div>
+	</section>
+
+	<section id="enter_screen">
+		<div class="col-2-enter">
+			<label onclick="runViz()" id="enterButton">Show my results</label>	
+		</div>
 	</section>
 
 
@@ -584,7 +592,7 @@
 				<a href="https://www.confrontingdata.dk/" target="_blank">Visit Confronting Data Co-lab.</a>
 			</p>
 		</div>
-		<label id="resetButton" onclick="resetAll()">Take the test again</label>
+		<label class="button" id="resetButton" onclick="resetAll()">Take the test again</label>
 	</div>
 
 	<div class="row">

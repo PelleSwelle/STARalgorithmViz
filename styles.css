@@ -23,14 +23,16 @@
 	height: fit-content;
 	max-height: 73vh;
 }
-#resetButton {
+.button {
 	background-color: white;
 	color: black;
 	font-family: AdobeGaramondPro;
 	padding: 1vw;
-	border-radius: 2px;
+	border-radius: 5px;
 	margin-left: 5%;
+	cursor: pointer;
 }
+
 
 @font-face {
   font-family: AdobeGaramondPro;
@@ -42,7 +44,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	/* border: 1px solid red; */
+	border: 1px solid red;
 	box-sizing: border-box;
 }
 
@@ -54,6 +56,7 @@
 	color: black;
 	margin-left: 0;
 }
+
 
 h1 {
 	font-family: AdobeGaramondPro;
@@ -301,6 +304,39 @@ section {
   display : flex;
   align-items : center;
 }
+
+#enter_screen {
+	background-color: black;
+	height: 100vh;
+	align-items: center;
+}
+
+.col-2-enter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: black;
+  	width: 90%;
+  	height: 90%;
+  	
+}
+
+#enterButton {
+	font-family: AdobeGaramondPro;
+	background-color: white;
+	color: #000000;
+	padding: 1vw;
+	text-align: center;
+
+	width: 20vw;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#enterButton:hover {
+	background-color: grey;
+}
+
 .col-3-closing_screen {
   width: 100%;
   height: 20vh;
