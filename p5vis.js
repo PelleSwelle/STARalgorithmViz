@@ -236,15 +236,13 @@ function draw()
 {
     if (vizIsVisible) 
     {
-        console.log("Canvas is : " + document.body.clien);
+        console.log("Canvas is : " + document.body.clientWidth);
         background(black);
         currentWindowWidth = windowWidth;
         currentWindowHeight = windowHeight;
         centerX = currentWindowWidth / 2;
-        // this works.
-        // resizeCanvas(currentWindowWidth, currentWindowHeight);
-    
-        strokeWeight(10);
+        
+        strokeWeight(8);
         stroke(255, 0, 0);
     
         // display the things
@@ -355,7 +353,6 @@ function draw()
     }
 
     displayBoxes();
-     
 }
 
 // This prevents the page from scrolling down to where it was previously.
@@ -707,7 +704,6 @@ function Line(startX, startY, endX, endY) {
         }
     }
     this.update = function() {
-        // TODO adjust at the end to not overshoot
         if (this.dir == "vertical") {
             if (this.currentY < this.endY) {
                 this.currentY += this.speed;
@@ -867,8 +863,9 @@ function windowResized() {
     console.log("window was resized to: " + document.body.clientWidth + " x " + document.body.clientHeight);
     // runViz();
     if (vizIsVisible) {
+        resizeCanvas(document.body.clientWidth, currentWindowHeight);
         calcPath();
-        resizeCanvas(document.body.clientWidth, document.body.clientHeight);
+
     }
  }
 
